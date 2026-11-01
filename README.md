@@ -1,49 +1,49 @@
-# Rose Wishes · 20/10
+# Rose Wishes · Ngày Phụ nữ Việt Nam 20/10
 
-Website tiếng Việt, Vite + React + TypeScript + React Three Fiber. Chạm để bắt đầu câu chuyện, xem nhân vật đến cửa và trao hoa, sau đó xoay/zoom bó hoa và khám phá đúng 11 lời chúc trong đặc tả.
+Rose Wishes là website quà tặng tương tác: người xem bắt đầu hành trình chàng trai mang hoa đến nhà cô gái, theo dõi cảnh trao hoa, sau đó xoay bó hoa 3D và khám phá **10 lời chúc qua 10 bông hồng chính**. Giao diện hỗ trợ tiếng Việt, tiếng Anh và chuyển đổi ngày/đêm.
 
-## Chạy tại local
+Bó hoa là điểm nhấn có mức đầu tư hình học cao nhất. Nhân vật có bộ xương và hoạt ảnh; nhà, sân vườn, hàng rào hoa giấy, xích đu, đường phố, sông, cầu và rừng được dựng bằng mã Three.js. Phong cách hướng đến cảm giác tự nhiên, dịu dàng và có chiều sâu; cây cối vẫn được cách điệu để phục vụ cảnh thời gian thực.
 
-Yêu cầu Node.js 22 trở lên.
+## Chạy dự án
+
+Yêu cầu Node.js 22 trở lên và npm. Chạy tại thư mục gốc:
 
 ```sh
 npm install
 npm run dev
 npm run build
 npm run preview
+npm run check
 ```
 
-Trên PowerShell chặn npm.ps1, dùng `npm.cmd` thay cho `npm`. Vite hiển thị địa chỉ local trong terminal.
+Vite in địa chỉ truy cập trong terminal, thông thường là http://localhost:5173. Nếu PowerShell chặn npm.ps1, dùng npm.cmd. Build tạo dist/; preview phục vụ bản build. Blender/MCP chỉ cần khi chỉnh mô hình. GLB được lưu cục bộ, không tải lại từ nguồn bên ngoài khi build; Google Fonts vẫn dùng mạng và có font hệ thống dự phòng.
 
-## Phạm vi hiện tại
+## Bản đồ tài liệu
 
-Đây là bản triển khai luồng tương tác với **model hình học tự tạo (placeholder 3D)**, không phải nhân vật realistic có rig. Cửa có pivot bản lề; nhân vật di chuyển vào vùng trigger trước cửa rồi mới gõ cửa. Chuyển động tay/chân mang tính mô phỏng; chưa có diễn xuất khuôn mặt, chuyển động ngón tay hay animation trao vật từ rig. Bó hoa sử dụng cùng component ở cả hai cảnh, 11 ID ổn định và năm kiểu cánh procedural. Camera tiến vào bó hoa rồi chuyển cảnh studio. Không sử dụng GLB hoặc hình ảnh tải từ nguồn bên ngoài.
+| Tài liệu | Nội dung |
+| --- | --- |
+| [Đặc tả sản phẩm](ROSE_WISHES_20_10_SPEC.md) | Trải nghiệm, trạng thái, tương tác và 10 lời chúc hiện hành |
+| [Bối cảnh](docs/SCENE_DESIGN.md) | Tọa độ, nhà, sân, cây, hàng rào, sông và cầu |
+| [Khung hình và ánh sáng](docs/FRAMING_AND_LIGHTING.md) | Camera, bố cục desktop/mobile, ánh sáng và ngày/đêm |
+| [Thiết kế mô hình](docs/MODEL_DESIGN.md) | Hình học bó hoa, nhân vật, vật liệu và mức chi tiết |
+| [Kiến trúc và kiểm thử](docs/ARCHITECTURE.md) | Thành phần mã, dữ liệu, hoạt ảnh và kiểm chứng |
+| [Tải cảnh](docs/SCENE_LOADING.md) | Preload, GPU, điều kiện hiện cảnh và lỗi |
+| [Đa ngôn ngữ](docs/LANGUAGES.md) | VI/EN, dropdown và chống xê dịch bố cục |
+| [Nhân vật nữ](docs/FEMALE_CHARACTER.md) | Tóc, trang phục, rig và quy trình xuất |
+| [Công cụ cục bộ](docs/LOCAL_3D_TOOLS.md) | Blender, MCP và quy trình làm việc |
+| [Quản lý tài nguyên](docs/PROJECT_CLEANUP.md) | Tệp phải giữ, cache và lịch sử dọn |
+| [Nguồn bó hoa](art/bouquet/README.md) | Bản Blender, recipe và đóng gói |
+| [Nguồn nhân vật](art/characters/README.md) | Bản nam/nữ và xuất GLB |
+| [Logo và favicon](art/branding/README.md) | Nguồn ảnh, kích thước và lệnh xuất biểu tượng |
+| [Nguồn và giấy phép](public/models/LICENSES.md) | Tài sản tự dựng và tài sản kế thừa |
 
-Chọn hoa bằng chuột/tap hoặc 11 nút bàn phím; thiệp hỗ trợ Escape, bông trước/tiếp và đóng. OrbitControls hỗ trợ kéo, cuộn và pinch. Đã khám phá được lưu trong sessionStorage. Nút âm thanh phát chuỗi âm ambient và tiếng gõ tổng hợp bằng Web Audio, mặc định tắt; không phải bản thu piano. Reduced motion rút ngắn chuyển cảnh. Khi WebGL không khả dụng hoặc canvas lỗi, ảnh SVG cục bộ cùng danh sách nút vẫn cho đọc đủ 11 lời chúc; chế độ này bỏ qua hoạt cảnh 3D.
+## Những đặc điểm phải giữ
 
-## Nội dung và asset
+- Chỉ 10 hoa chính tương tác, ID rose-01 đến rose-10. Hoa phụ và lá không mở thiệp.
+- Bố trí hoa dùng chung src/data/bouquet-layout.json; dịch hoặc đổi vị trí không đổi ID.
+- Chàng trai đứng chờ thao tác bắt đầu. Có bỏ qua, xem lại và giảm chuyển động. Âm thanh mặc định tắt.
+- Không hiện mô hình tạm lúc tải. Chỉ mở Canvas và tương tác khi tài nguyên/GPU sẵn sàng.
+- Story/high/balanced là các mức chi tiết có mục đích, không phải tệp thừa.
+- Rào hoa giấy chỉ ở mặt trước; chừa lối chính và lối lên cầu. Sau nhà là vườn, sông, đường nhỏ và rừng.
+- Tài liệu đồng bộ phiên bản ngày 01/11/2026. Mô tả hiện trạng không có nghĩa mọi mục tiêu mỹ thuật đã đạt mức ảnh chụp thật.
 
-- Sửa lời chúc: `src/data/wishes.ts`; bố trí/màu/biến thể: `src/data/roses.ts`.
-- Cảnh và nhân vật procedural: `src/scenes/Story.tsx`.
-- Hoa, giấy gói và nơ dùng chung: `src/components/Bouquet.tsx`.
-- Luồng trạng thái: `src/hooks/useSceneFlow.ts`.
-- Đặc tả gốc: `ROSE_WISHES_20_10_SPEC.md`.
-
-Các asset **chưa có**, cần bổ sung để đạt mỹ thuật realistic trong đặc tả:
-
-1. `public/models/characters/`: nam trưởng thành có rig và idle/walk/knock/handover; nữ trưởng thành có rig và open-door/receive/smile.
-2. `public/models/house/`: nhà, cửa riêng có pivot bản lề, đường lát đá, hàng rào, cây và hoa leo.
-3. `public/models/flowers/`: tối thiểu 3–5 mẫu hồng realistic, giấy gói, lá, cành và nơ; giữ mapping rose-01 đến rose-11 khi thay model.
-4. `public/textures/`: texture PBR WebP/KTX2 có giấy phép phù hợp.
-5. `public/audio/`: piano, ambience và tiếng gõ có giấy phép nếu thay âm tổng hợp.
-6. `public/environments/`: HDRI hoàng hôn/studio có giấy phép.
-
-Chỉ đặt file vào public chưa tự tích hợp: cần thay hình học trong các component bằng GLTFLoader/useGLTF, kết nối animation mixer và attachment tay. Ghi tác giả/giấy phép của asset mới trước khi phân phối. SVG fallback và hình học hiện tại được tạo trực tiếp cho dự án. Google Fonts là tùy chọn online; font Georgia/sans-serif hệ thống hoạt động khi offline.
-
-## Kiểm tra thủ công
-
-- Mở mới: không tự bước đi. Click âm thanh không bắt đầu hành trình; click bắt đầu nhiều lần không reset.
-- Đợi nhân vật tới cửa, gõ hai nhịp, mở cửa và trao hoa; hoặc dùng Bỏ qua/Mở cửa.
-- Chọn lần lượt 01–11, đối chiếu nội dung với đặc tả; thử click hoa trên canvas, kéo xoay, cuộn/pinch, đóng thiệp, replay, reset camera.
-- Dùng Tab/Enter/Escape; bật reduced motion trong hệ điều hành; chặn WebGL để kiểm tra fallback.
-- Kiểm tra thêm trên iOS Safari và Android Chrome trước khi phát hành. Chưa có kiểm chứng trên thiết bị thật.

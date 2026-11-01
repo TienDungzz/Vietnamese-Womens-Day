@@ -1,0 +1,13 @@
+[
+  {
+    "file": "plants/potted-plant.glb",
+    "author": "Rico Cilliers / Poly Haven",
+    "source": "https://polyhaven.com/a/potted_plant_01",
+    "download": "https://api.polyhaven.com/files/potted_plant_01",
+    "bytes": 3466916,
+    "sha256": "8d8f6142b8783bf97cbcb4f76f37e159834627f8749e2ffa438268290da3a271",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "modifications": "Textures resized to max 1024px and converted to WebP; unused animation clips and held accessory removed; duplicate/unused data pruned; Sam shirt changed to cream; plant mesh simplified with bounded geometric error."
+  }
+]

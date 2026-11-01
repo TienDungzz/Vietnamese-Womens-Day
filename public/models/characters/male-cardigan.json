@@ -1,0 +1,29 @@
+{
+  "file": "public/models/characters/male-cardigan.glb",
+  "bytes": 2280672,
+  "sha256": "432bec8be2dff845834004c831ca251dcecc97c714336e84efdd54bd6eed83ae",
+  "source": {
+    "file": "characters/sam.glb",
+    "author": "Innerscene, adapted from MakeHuman/MPFB CC0 assets",
+    "source": "https://www.innerscene.com/tools/library/3d-parts/locomotion-collection-sam-3d-person-animated-dc23800f",
+    "download": "https://www.innerscene.com/api/library/locomotion-collection-sam-3d-person-animated-dc23800f/download",
+    "bytes": 5389620,
+    "sha256": "12145bff5ba9ed09b08db081f09135d52f059d300771edbddd5279f98a29eee3",
+    "license": "CC0-1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "modifications": "Textures resized to max 1024px and converted to WebP; unused animation clips and held accessory removed; duplicate/unused data pruned; Sam shirt changed to cream; plant mesh simplified with bounded geometric error."
+  },
+  "modifications": "Project-authored charcoal cardigan, newly rebuilt continuous straight-leg trousers and loose layered 7/3 hair with a strand opacity atlas and forehead wisps. Taller slimmer proportions and narrower leg stance applied to both mesh and rest skeleton. Existing CC0 face textures and animation clips retained.",
+  "native": "art/characters/male-cardigan.blend",
+  "recipe": "scripts/blender/build_male.py",
+  "refinement": [
+    "scripts/blender/refine_male.py",
+    "scripts/blender/reference_style_v4.py"
+  ],
+  "gaitSpeedAtActorScale": 0.7065,
+  "animations": [
+    "Idle_Standing",
+    "Walk_Carry",
+    "Walk_Relaxed"
+  ]
+}

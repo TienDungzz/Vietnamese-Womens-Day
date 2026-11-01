@@ -1,0 +1,137 @@
+﻿[
+    {
+        "path":  "src\\scenes\\ProceduralPerson.tsx",
+        "files":  1,
+        "bytes":  3950
+    },
+    {
+        "path":  "src\\scenes\\DaySky.tsx",
+        "files":  1,
+        "bytes":  1396
+    },
+    {
+        "path":  "public\\models\\characters\\sam.glb",
+        "files":  1,
+        "bytes":  5389620
+    },
+    {
+        "path":  "public\\models\\characters\\maya.glb",
+        "files":  1,
+        "bytes":  4934816
+    },
+    {
+        "path":  "public\\models\\flowers",
+        "files":  6,
+        "bytes":  1216679
+    },
+    {
+        "path":  "scripts\\prepare-roses.mjs",
+        "files":  1,
+        "bytes":  3123
+    },
+    {
+        "path":  "scripts\\blender\\__pycache__",
+        "files":  7,
+        "bytes":  156771
+    },
+    {
+        "path":  "art\\bouquet\\before-canopy-gap-placement.blend",
+        "files":  1,
+        "bytes":  76012856
+    },
+    {
+        "path":  "art\\bouquet\\before-compact-arrangement.blend",
+        "files":  1,
+        "bytes":  72036218
+    },
+    {
+        "path":  "art\\bouquet\\before-meadow-fillers.blend",
+        "files":  1,
+        "bytes":  72067322
+    },
+    {
+        "path":  "art\\bouquet\\before-raised-fillers.blend",
+        "files":  1,
+        "bytes":  75997213
+    },
+    {
+        "path":  "art\\bouquet\\rose-wishes-bouquet.blend1",
+        "files":  1,
+        "bytes":  199063074
+    },
+    {
+        "path":  "art\\bouquet\\session-before-bouquet.blend",
+        "files":  1,
+        "bytes":  94256
+    },
+    {
+        "path":  "art\\characters\\before-calves-hair-volume.blend",
+        "files":  1,
+        "bytes":  81186603
+    },
+    {
+        "path":  "art\\characters\\before-reference-v4.blend",
+        "files":  1,
+        "bytes":  81180671
+    },
+    {
+        "path":  "art\\characters\\before-slim-sidepart.blend",
+        "files":  1,
+        "bytes":  81491722
+    },
+    {
+        "path":  "art\\characters\\female-grey-jeans.blend1",
+        "files":  1,
+        "bytes":  93166815
+    },
+    {
+        "path":  "art\\characters\\male-cardigan.blend1",
+        "files":  1,
+        "bytes":  84410682
+    },
+    {
+        "path":  "art\\characters\\male-cardigan-calves-volume-preview.png",
+        "files":  1,
+        "bytes":  598607
+    },
+    {
+        "path":  "art\\characters\\male-cardigan-preview.png",
+        "files":  1,
+        "bytes":  600725
+    },
+    {
+        "path":  "art\\characters\\male-cardigan-preview.png0030.png",
+        "files":  1,
+        "bytes":  600065
+    },
+    {
+        "path":  "art\\characters\\male-reference-v4-preview.png",
+        "files":  1,
+        "bytes":  600725
+    },
+    {
+        "path":  "art\\characters\\male-soft73-head.png",
+        "files":  1,
+        "bytes":  633215
+    },
+    {
+        "path":  ".qa",
+        "files":  106,
+        "bytes":  759741324
+    },
+    {
+        "path":  ".preview-profile",
+        "files":  1524,
+        "bytes":  350057474
+    },
+    {
+        "path":  "dist",
+        "files":  38,
+        "bytes":  67544763
+    },
+    {
+        "path":  "tsconfig.tsbuildinfo",
+        "files":  1,
+        "bytes":  750
+    }
+]
