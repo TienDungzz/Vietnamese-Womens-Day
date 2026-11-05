@@ -75,7 +75,7 @@ Nguồn: art/characters/male-cardigan.blend. Web: male-cardigan.glb. Các pass c
 
 Nữ là bản thích nghi riêng từ cùng nền rig/giải phẫu, không đổi trực tiếp asset nam. Áo xám tay ngắn, jeans xanh bạc màu cạp cao ống rộng có chi tiết rách nhẹ, giày ngà, túi vai sáng và dây chuyền nhỏ.
 
-Tóc hiện hành thẳng tối màu chạm vai, phần đuôi cong nhẹ vào trong, mái thưa ngang trán ở trên mi. Dùng lớp tóc nền và sợi hình học thuôn thay vì alpha cutout dày gây nhiễu vùng trán. Đây là thay thế kiểu tóc dài uốn trước đó.
+Tóc hiện hành thẳng tối màu chạm vai, phần đuôi cong nhẹ vào trong. Mái có bề mặt cong ôm trán, chân nối đỉnh đầu và đầu sợi lệch độ dài trên lông mày; atlas màu/alpha và normal 2048 × 1024 tạo khe thưa và sợi cong nhỏ. GLB dùng alpha MASK kết hợp alpha-to-coverage trong runtime. Hai bên vẫn dùng lớp tóc nền và sợi hình học. Đây là thay thế kiểu tóc dài uốn trước đó.
 
 Nguồn: female-grey-jeans.blend; web: female-grey-jeans.glb. Chi tiết quy trình ở FEMALE_CHARACTER.md.
 

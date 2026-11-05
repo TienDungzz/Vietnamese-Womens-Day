@@ -85,15 +85,13 @@ def apply(scene,rig):
             p=.025+j/28*(end-.025);points.append(Vector((.101*math.sin(p)*math.sin(a),-.04-.126*math.sin(p)*math.cos(a),1.65+.126*math.cos(p))))
         lengths.append((points,[.00024]*29))
     fibers('RW Female straight fine fibers',lengths)
-    fringe=[]
-    for k in range(84):
-        x=-.069+k/83*.138+rng.uniform(-.00065,.00065);end=1.656+rng.uniform(0,.015)-.001*(abs(x)/.07)
-        a=Vector((x*.72,-.104,1.742-.012*(abs(x)/.07)));b=Vector((x*.95,-.143,1.724));c=Vector((x,-.159,1.687));d=Vector((x+rng.uniform(-.002,.002),-.151,end));points=[];radii=[];radius=rng.uniform(.00045,.00072)
-        for j in range(29):
-            t=j/28;points.append(a*(1-t)**3+b*3*(1-t)**2*t+c*3*(1-t)*t*t+d*t**3);radii.append(radius*(.75+.25*math.sin(t*math.pi))*max(.025,(1-t)**.65))
-        fringe.append((points,radii))
-    o=fibers('RW Female airy fringe',fringe);o['hairstyle']='straight shoulder length with geometric wispy bangs';o['interactive']=False
-    print('STRAIGHT_HAIR_READY: shoulder length, inward tips, airy fringe above eyelashes')
+    import importlib.util
+    preset=Path(__file__).with_name('female_soft_fringe.py')
+    spec=importlib.util.spec_from_file_location('rw_female_soft_fringe',preset)
+    module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+    module.apply(scene,rig)
+    print('STRAIGHT_HAIR_READY: shoulder length and soft curved feathered fringe')
+
 
 def update_existing():
     scene=bpy.data.scenes.get('Rose Wishes - Female Atelier')

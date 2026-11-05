@@ -14,7 +14,9 @@ Tóc **thẳng ngang vai màu nâu đen**, rơi hai bên má, đuôi cong nhẹ 
 | Web | public/models/characters/female-grey-jeans.glb |
 | Dựng cơ thể/trang phục | scripts/blender/build_female.py |
 | Preset tóc hiện tại | scripts/blender/female_straight_bangs.py |
+| Chỉnh riêng mái mềm | scripts/blender/female_soft_fringe.py |
 | Atlas tóc | art/characters/textures/female-straight-strands.png |
+| Màu/alpha và normal của mái | art/characters/textures/female-fringe-strands.png, female-fringe-normal.png |
 | Đóng gói | scripts/finalize-female.mjs |
 | URL/cache version | src/sceneAssets.ts |
 
@@ -22,9 +24,9 @@ build_female gọi preset tóc hiện tại khi dựng đầy đủ. Muốn ch�
 
 ## 3. Tóc và vật liệu
 
-Tóc có lớp nền kín và các sợi mảnh hình học thuôn. Mái được phân thành nhiều sợi, tránh mép alpha cắt vụn/nhiễu trên trán. Atlas tạo sắc độ và sợi nhỏ trên nền nâu đen. Mesh tóc gắn theo bone đầu.
+Tóc hai bên có lớp nền và sợi hình học. Riêng mái dùng bề mặt cong ôm trán, chân tóc liền với đỉnh đầu và đầu sợi có độ dài khác nhau. Atlas màu/alpha và normal 2048 × 1024 tạo các sợi mảnh hơi lệch hướng, chừa khe nhỏ ở đuôi mái trên lông mày. Mesh gắn hoàn toàn theo bone đầu. GLB dùng alpha MASK, cutoff 0,28, hai mặt; runtime bật alpha-to-coverage để giảm răng cưa.
 
-Finalizer bỏ KHR_materials_sheen ở vật liệu RW Female straight vì extension xuất trước đây làm tóc đen trông bạc. Các texture tóc/fiber nén WebP lossless, phần còn lại chất lượng 94, tối đa 1024px. Meshopt dùng cho hình học; không tự giảm chất lượng bằng thay kiểu tóc khác.
+Finalizer bỏ KHR_materials_sheen ở vật liệu tóc để tránh tóc đen trông bạc. Các texture tóc/fiber nén WebP lossless; atlas mái giữ cạnh dài 2048px, tóc bên 1024px. Phần còn lại chất lượng 94, tối đa 1024px. Meshopt dùng cho hình học.
 
 ## 4. Bộ xương và vai trò trong cảnh
 
@@ -35,7 +37,7 @@ Trong cảnh mở cửa/trao hoa, nữ dùng IK tay tới bó hoa chung. Không 
 ## 5. Cập nhật chỉ tóc
 
 1. Mở master nữ bằng Blender; kiểm tra scene/rig đúng, lưu công việc cần giữ.
-2. Chạy script female_straight_bangs.py trong Blender. Script xuất GLB nữ và stage bản .blend ở .qa/characters/female-hair-update.blend.
+2. Để sửa riêng mái, nạp female_soft_fringe.py rồi gọi update_existing(), kiểm tra hình và gọi export_current(). Bản stage nằm ở .qa/characters/female-soft-fringe.blend. Để dựng lại toàn bộ kiểu tóc ngang vai, dùng female_straight_bangs.py; preset này cũng gọi phần mái mới và stage ở female-hair-update.blend.
 3. Kiểm tra tóc, khuôn mặt, vai và hoạt ảnh trong bản stage.
 4. Sau khi chấp nhận bản stage, chép về art/characters/female-grey-jeans.blend.
 5. Chạy finalizer rồi build.

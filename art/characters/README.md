@@ -8,6 +8,8 @@
 | female-grey-jeans.blend | Nữ áo xám, jeans xanh bạc ống rộng, giày/túi ngà, tóc thẳng ngang vai mái thưa |
 | textures/soft-hair-strands.png | Atlas sợi/opacity tóc nam |
 | textures/female-straight-strands.png | Atlas màu sợi tóc nữ |
+| textures/female-fringe-strands.png | Atlas màu/alpha 2048 × 1024 cho mái nữ |
+| textures/female-fringe-normal.png | Normal sợi mái nữ |
 
 Giải phẫu mặt/tay, skeleton và clip kế thừa Sam CC0; trang phục, tóc và chỉnh tỷ lệ thuộc công việc dự án. Đây là hai tài sản riêng dùng cùng nền rig, không sửa nữ bằng ghi đè GLB nam.
 
@@ -39,7 +41,7 @@ Packer kiểm hai clip, chặn đối tượng bó hoa lẫn vào, nén map WebP
 
 ## 4. Nữ
 
-build_female.py dựng bản thích nghi; female_straight_bangs.py là preset tóc hiện hành và đã được gọi từ recipe đầy đủ. Đổi riêng tóc dùng update_existing(), không dựng lại toàn cơ thể.
+build_female.py dựng bản thích nghi; female_straight_bangs.py là preset tóc hiện hành và đã được gọi từ recipe đầy đủ. Phần mái cong được dựng bởi female_soft_fringe.py. Đổi riêng mái dùng update_existing(), kiểm tra rồi export_current(); bản stage là .qa/characters/female-soft-fringe.blend. Không dựng lại toàn cơ thể.
 
 Blender export nữ trực tiếp vào public/models/characters/female-grey-jeans.glb, sau đó:
 

@@ -1,5 +1,5 @@
 export const maleModelUrl='/models/characters/male-cardigan.glb?v=soft73-straight-v4-final';
-export const femaleModelUrl='/models/characters/female-grey-jeans.glb?v=straight-bangs-v2';
+export const femaleModelUrl='/models/characters/female-grey-jeans.glb?v=soft-fringe-v3';
 export const plantModelUrl='/models/plants/potted-plant.glb';
 export const bouquetDetail=()=>window.matchMedia('(max-width: 760px)').matches?'balanced':'high';
 export const roseModelUrl=(variant:number,story=false,detail=bouquetDetail())=>story?`/models/bouquet/story/rose-${variant}.glb`:`/models/bouquet/rose-${variant}-${detail}.glb`;
