@@ -37,12 +37,12 @@ export function drawFrame(canvas:HTMLCanvasElement,frame:Frame,draft:Draft,image
    ctx.strokeStyle=palette.accent;ctx.lineWidth=3;ctx.stroke(path);
   }
   const entry=draft.entries[index],image=entry?images.get(entry.photoId):undefined;
-  if(entry&&image)drawPhoto(ctx,image,slot,entry);else{ctx.save();ctx.clip(photoPath(slot));ctx.fillStyle=palette.background;ctx.fillRect(slot.x,slot.y,slot.width,slot.height);ctx.fillStyle=palette.line;ctx.font='42px Georgia,serif';ctx.fillText(String(index+1).padStart(2,'0'),slot.x+slot.width/2,slot.y+slot.height/2+15);ctx.restore()}
+  if(entry&&image)drawPhoto(ctx,image,slot,entry);else{ctx.save();ctx.clip(photoPath(slot));ctx.fillStyle=palette.background;ctx.fillRect(slot.x,slot.y,slot.width,slot.height);ctx.fillStyle=palette.line;ctx.font='42px "Playfair Display","Times New Roman",serif';ctx.fillText(String(index+1).padStart(2,'0'),slot.x+slot.width/2,slot.y+slot.height/2+15);ctx.restore()}
   ctx.restore();
  });
  frameFinishing(ctx,frame,palette);
  if(specialCaption(ctx,frame,palette,language))return;
- ctx.fillStyle=palette.ink;ctx.font='italic 40px Georgia,serif';ctx.fillText(language==='vi'?'20 khoảnh khắc, 10 lời thương':'20 memories, 10 wishes',frame.width/2,frame.height-100,frame.width-150);
+ ctx.fillStyle=palette.ink;ctx.font='italic 40px "Playfair Display","Times New Roman",serif';ctx.fillText(language==='vi'?'20 khoảnh khắc, 10 lời thương':'20 memories, 10 wishes',frame.width/2,frame.height-100,frame.width-150);
  ctx.fillStyle=palette.accent;ctx.font='24px "Be Vietnam Pro",sans-serif';ctx.fillText(language==='vi'?'Gửi em, bằng tất cả dịu dàng':'For you, with all my tenderness',frame.width/2,frame.height-55,frame.width-150);
 }
 export async function exportFrame(frame:Frame,draft:Draft,language:Language,catalog:Photo[]=photos){

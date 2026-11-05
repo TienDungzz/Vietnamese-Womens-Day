@@ -44,7 +44,7 @@ export function frameBackground(c:Context,f:Frame,p:Theme){
   else {heart(c,49,y,12,p.accent);star(c,w-49,y+30,13,p.accent)}
  }
  c.textAlign='center';c.fillStyle=p.accent;
- c.font=p.id==='vintage'?`bold ${Math.min(57,w*.052)}px monospace`:p.id==='cherry'?`bold ${Math.min(66,w*.056)}px "Be Vietnam Pro",sans-serif`:`italic bold ${Math.min(84,w*.066)}px Georgia,serif`;
+ c.font=p.id==='vintage'?`bold ${Math.min(57,w*.052)}px monospace`:p.id==='cherry'?`bold ${Math.min(66,w*.056)}px "Be Vietnam Pro",sans-serif`:`italic bold ${Math.min(84,w*.066)}px "Playfair Display","Times New Roman",serif`;
  const title=p.id==='vintage'?'OUR MEMORY JOURNAL':p.id==='cherry'?'SWEET LITTLE MOMENTS':p.id==='midnight'?'Written in the stars':"Happy Women's Day";
  if(p.id==='blush'){c.strokeStyle='#fffafc';c.lineWidth=8;c.lineJoin='round';c.strokeText(title,w/2,127,w-230)}
  c.fillText(title,w/2,127,w-230);

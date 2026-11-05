@@ -12,7 +12,7 @@ function tape(c:Context,x:number,y:number,w:number,angle:number,color:string){
 function postmark(c:Context,x:number,y:number,color:string){
  c.save();c.translate(x,y);c.rotate(-.18);c.strokeStyle=color;c.lineWidth=2;
  for(const r of [37,44]){c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.stroke()}
- c.fillStyle=color;c.font='bold 18px Georgia,serif';c.textAlign='center';c.fillText('20 OCT',0,6);
+ c.fillStyle=color;c.font='bold 18px "Playfair Display","Times New Roman",serif';c.textAlign='center';c.fillText('20 OCT',0,6);
  for(let i=0;i<3;i++){c.beginPath();c.moveTo(40,-15+i*14);c.bezierCurveTo(60,-30+i*14,78,i*14,100,-15+i*14);c.stroke()}
  c.restore();
 }
@@ -48,7 +48,7 @@ export function specialBackground(c:Context,f:Frame,p:FrameStyle):boolean{
   line(c,84,0,84,h,'#d5a3a3',2);
   c.save();c.translate(w/2,104);c.rotate(-.025);c.fillStyle='#e5ebf1';c.fillRect(-w*.32,-58,w*.64,116);
   tape(c,-w*.27,-45,92,-.2,'#e9d3b2dd');tape(c,w*.27,45,92,-.2,'#e9d3b2dd');
-  c.fillStyle=p.ink;c.textAlign='center';c.font=`italic bold ${Math.min(71,w*.061)}px Georgia,serif`;c.fillText('Little things, big love',0,7,w*.60);
+  c.fillStyle=p.ink;c.textAlign='center';c.font=`italic bold ${Math.min(71,w*.061)}px "Playfair Display","Times New Roman",serif`;c.fillText('Little things, big love',0,7,w*.60);
   c.restore();c.fillStyle=p.accent;c.font='23px monospace';c.textAlign='center';c.fillText('MEMORY NOTES  /  20.10',w/2,192,w-220);
   c.strokeStyle=p.accent;c.lineWidth=3;
   for(const [x,y] of [[w-46,215],[w-46,h-195]]){c.beginPath();c.moveTo(x-15,y-20);c.lineTo(x+7,y+20);c.moveTo(x+15,y-20);c.lineTo(x-7,y+20);c.stroke()}
@@ -60,13 +60,13 @@ export function specialBackground(c:Context,f:Frame,p:FrameStyle):boolean{
   c.save();c.beginPath();c.rect(0,0,w,h);c.rect(28,28,w-56,h-56);c.clip('evenodd');
   for(let x=-h;x<w+h;x+=96){c.fillStyle=Math.round(x/96)%2?'#b46a71':'#809ba9';c.beginPath();c.moveTo(x,0);c.lineTo(x+40,0);c.lineTo(x+h+40,h);c.lineTo(x+h,h);c.closePath();c.fill()}
   c.restore();c.strokeStyle='#d3c6b1';c.lineWidth=2;c.strokeRect(40,40,w-80,h-80);
-  c.fillStyle=p.ink;c.textAlign='left';c.font=`${Math.min(75,w*.066)}px Georgia,serif`;c.fillText('To you, with love',100,117,w-340);
+  c.fillStyle=p.ink;c.textAlign='left';c.font=`${Math.min(75,w*.066)}px "Playfair Display","Times New Roman",serif`;c.fillText('To you, with love',100,117,w-340);
   c.font='21px monospace';c.fillText('A LITTLE LETTER  •  20 / 10',104,166,w-340);
   c.strokeStyle=p.accent;c.setLineDash([5,5]);c.strokeRect(w-189,63,91,108);c.setLineDash([]);
-  c.fillStyle='#ead4d3';c.fillRect(w-179,73,71,88);c.fillStyle=p.accent;c.font='italic bold 33px Georgia,serif';c.textAlign='center';c.fillText('20',w-143,112);c.font='17px monospace';c.fillText('OCT',w-143,142);
+  c.fillStyle='#ead4d3';c.fillRect(w-179,73,71,88);c.fillStyle=p.accent;c.font='italic bold 33px "Playfair Display","Times New Roman",serif';c.textAlign='center';c.fillText('20',w-143,112);c.font='17px monospace';c.fillText('OCT',w-143,142);
   postmark(c,w-255,159,'#806f6380');
   line(c,100,201,w-100,201,'#c7b9a2');
-  c.fillStyle=p.accent;c.textAlign='left';c.font='italic 25px Georgia,serif';c.fillText('Special delivery, just for you.',100,h-176,w-200);
+  c.fillStyle=p.accent;c.textAlign='left';c.font='italic 25px "Playfair Display","Times New Roman",serif';c.fillText('Special delivery, just for you.',100,h-176,w-200);
   return true;
  }
  return false;
@@ -107,7 +107,7 @@ export function specialCaption(c:Context,f:Frame,p:FrameStyle,language:Language)
  const special=['film','scrapbook','postcard'].includes(p.id);
  if(!special)return false;
  c.textAlign='center';c.fillStyle=p.ink;
- c.font=p.id==='film'?'29px monospace':p.id==='postcard'?'italic 38px Georgia,serif':'italic 35px Georgia,serif';
+ c.font=p.id==='film'?'29px monospace':p.id==='postcard'?'italic 38px "Playfair Display","Times New Roman",serif':'italic 35px "Playfair Display","Times New Roman",serif';
  c.fillText(language==='vi'?'20 khoảnh khắc, 10 lời thương':'20 memories, 10 wishes',f.width/2,f.height-100,f.width-190);
  c.fillStyle=p.accent;c.font='20px monospace';c.fillText(p.id==='film'?'EXPOSED WITH LOVE  /  20.10':p.id==='scrapbook'?'A PAGE WORTH KEEPING  ♡':'SENT WITH ALL MY HEART',f.width/2,f.height-55,f.width-190);
  return true;
