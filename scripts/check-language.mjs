@@ -11,17 +11,17 @@ try{
  await send('Page.enable');await send('Runtime.enable');
  await send('Emulation.setDeviceMetricsOverride',{width:360,height:820,deviceScaleFactor:1,mobile:true});
  await send('Page.addScriptToEvaluateOnNewDocument',{source:"const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type,...args){return type==='webgl2'?null:original.call(this,type,...args)}"});
- const navigate=async()=>{const result=await send('Page.navigate',{url:'http://127.0.0.1:5173/'});if(result.errorText)await send('Page.navigate',{url:'http://127.0.0.1:5173/'});await wait("!!document.querySelector('.language-trigger')")};
+ const navigate=async()=>{const result=await send('Page.navigate',{url:'http://127.0.0.1:5173/'});if(result.errorText)await send('Page.navigate',{url:'http://127.0.0.1:5173/'});await wait("!!document.querySelector('.language-select__trigger')")};
  await navigate();
- const language=async value=>{await evaluate("document.querySelector('.language-trigger').click()");await wait("!!document.querySelector('[role=listbox]')");await evaluate(`document.querySelector('[role=option][lang="${value}"]').click()`);await wait(`document.documentElement.lang==='${value}'`)};
+ const language=async value=>{await evaluate("document.querySelector('.language-select__trigger').click()");await wait("!!document.querySelector('[role=listbox]')");await evaluate(`document.querySelector('[role=option][lang="${value}"]').click()`);await wait(`document.documentElement.lang==='${value}'`)};
  await language('vi');
- await evaluate("document.querySelector('.skip-intro').click()");await wait("document.querySelectorAll('.rose-picker button').length===10");
+ await evaluate("document.querySelector('.app__skip-intro').click()");await wait("document.querySelectorAll('.rose-picker button').length===10");
  await evaluate("document.querySelectorAll('.rose-picker button')[2].click()");await wait("!!document.querySelector('#wish-title')");
  const vietnamese=await evaluate("document.querySelector('#wish-title').innerText");
  await language('en');
  assert.equal(await evaluate("document.querySelector('#wish-title').innerText"),'New beginnings');
  assert.equal(await evaluate("document.querySelectorAll('.rose-picker button')[2].getAttribute('aria-pressed')"),'true');
- assert.match(await evaluate("document.querySelector('.heading').textContent"),/Every flower/);
+ assert.match(await evaluate("document.querySelector('.app__heading').textContent"),/Every flower/);
  assert.equal(await evaluate("document.querySelector('.theme-toggle').getAttribute('aria-label')"),'Switch to nighttime');
  for(let i=0;i<10;i++){
   await evaluate(`document.querySelectorAll('.rose-picker button')[${i}].click()`);
@@ -29,27 +29,27 @@ try{
   assert.equal(await evaluate("/[ĂăĐđĨĩŨũƠơƯư\\u1ea0-\\u1ef9]/.test(document.querySelector('.wish-card').innerText)"),false);
  }
  assert.equal(await evaluate("document.documentElement.scrollWidth<=innerWidth"),true);
- await send('Page.reload');await wait("!!document.querySelector('.language-trigger')");
+ await send('Page.reload');await wait("!!document.querySelector('.language-select__trigger')");
  assert.equal(await evaluate("document.documentElement.lang"),'en');
- assert.equal(await evaluate("document.querySelector('.language-trigger').textContent.trim()"),'EN');
+ assert.equal(await evaluate("document.querySelector('.language-select__trigger').textContent.trim()"),'EN');
  assert.match(await evaluate('document.title'),/tenderness/);
- await language('vi');await evaluate("document.querySelector('.skip-intro').click()");await wait("document.querySelectorAll('.rose-picker button').length===10");
+ await language('vi');await evaluate("document.querySelector('.app__skip-intro').click()");await wait("document.querySelectorAll('.rose-picker button').length===10");
  await evaluate("document.querySelectorAll('.rose-picker button')[2].click()");await wait("!!document.querySelector('#wish-title')");
  assert.equal(await evaluate("document.querySelector('#wish-title').innerText"),vietnamese);
  // Use actual browser keyboard events to validate listbox navigation and focus.
  const key=async value=>{await send('Input.dispatchKeyEvent',{type:'keyDown',key:value});await send('Input.dispatchKeyEvent',{type:'keyUp',key:value})};
- await evaluate("document.querySelector('.language-trigger').focus()");await key('ArrowDown');
+ await evaluate("document.querySelector('.language-select__trigger').focus()");await key('ArrowDown');
  await wait("document.activeElement?.getAttribute('role')==='option'");
  await key('End');await key('Enter');await wait("document.documentElement.lang==='en'");
- assert.equal(await evaluate("document.activeElement.className"),'language-trigger');
+ assert.equal(await evaluate("document.activeElement.className"),'language-select__trigger');
  assert.equal(await evaluate("!!document.querySelector('[role=listbox]')"),false);
  await key('ArrowUp');await wait("!!document.querySelector('[role=listbox]')");await key('Home');await key('Escape');
  assert.equal(await evaluate('document.documentElement.lang'),'en');
- assert.equal(await evaluate("document.activeElement.className"),'language-trigger');
+ assert.equal(await evaluate("document.activeElement.className"),'language-select__trigger');
  await key('ArrowDown');await wait("!!document.querySelector('[role=listbox]')");await key('Tab');
  await wait("!document.querySelector('[role=listbox]')");
- await evaluate("document.querySelector('.language-trigger').click()");await wait("!!document.querySelector('.language-menu')");
- assert.equal(await evaluate("(()=>{const r=document.querySelector('.language-menu').getBoundingClientRect();return r.left>=0&&r.right<=innerWidth})()"),true);
+ await evaluate("document.querySelector('.language-select__trigger').click()");await wait("!!document.querySelector('.language-select__menu')");
+ assert.equal(await evaluate("(()=>{const r=document.querySelector('.language-select__menu').getBoundingClientRect();return r.left>=0&&r.right<=innerWidth})()"),true);
  await send('Input.dispatchMouseEvent',{type:'mousePressed',x:10,y:160,button:'left',clickCount:1});
  await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:10,y:160,button:'left',clickCount:1});
  await wait("!document.querySelector('[role=listbox]')");

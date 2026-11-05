@@ -45,3 +45,7 @@ Giữ tên tác giả, URL nguồn, điều khoản và metadata có liên quan;
 
 Logo website là ảnh người dùng cung cấp, được xử lý tách nền bằng imagegen; nguồn xử lý nằm ở art/branding/logo-source.png. Logo và favicon không thuộc nhóm mô hình CC0 ở trên; không suy giấy phép logo từ giấy phép Sam hoặc Poly Haven. Xem art/branding/README.md cho quy trình xuất.
 
+## 6. Ảnh mẫu photobooth
+
+20 ảnh mẫu được tham chiếu bằng link ID cố định từ [Lorem Picsum](https://picsum.photos/images). `src/photobooth/photos.json` giữ link ảnh/thumbnail, tên tác giả và URL nguồn Unsplash lấy từ API Picsum. Đây là ảnh thay thế để xem thử trước khi có bộ ảnh cá nhân, không thuộc các mô hình CC0 ở mục 1–2 và không phải ảnh riêng của chủ dự án. Khi thay ảnh chính thức, cập nhật danh mục và thông tin nguồn tương ứng.
+

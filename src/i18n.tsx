@@ -2,6 +2,8 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 
 export const messages = {
+ '20 khoảnh khắc':'20 memories',
+
  'Chờ một chút nhé, có điều bất ngờ dành cho em…':'Just a moment, a little surprise awaits you…',
  'Những điều đẹp đẽ luôn đáng để chờ đợi.':'Beautiful things are worth waiting for.',
  'Chưa thể tải đầy đủ cảnh.':'We couldn’t finish preparing your surprise.',
@@ -17,7 +19,7 @@ export const messages = {
  'Mỗi đóa hoa,':'Every flower,', 'một lời thương.':'a little love.',
  'Có một điều anh':'There’s something', 'muốn gửi đến':'I want to share with', 'em…':'you…',
  'Có những điều dịu dàng, anh đã giấu trong từng cánh hoa.':'A little tenderness, hidden in every petal.',
- 'Một hành trình nhỏ. Một bó hoa. Và những lời chưa nói.':'A little journey, leading to something just for you.',
+
  'Bó hoa hồng 3D tương tác':'Interactive 3D rose bouquet',
  'Khung cảnh chàng trai mang hoa đến ngôi nhà':'A young man bringing flowers to a house',
  'Chạm vào màn hình để anh bước đến bên em ♡':'Tap the screen and let me come to you ♡',
@@ -31,7 +33,8 @@ export const messages = {
  'Chạm vào một bông hoa để mở lời chúc':'Tap a flower to reveal a wish',
  'Chọn một trong {count} bông hoa':'Choose one of {count} flowers',
  'Bông {number}: {title}':'Flower {number}: {title}',
- '↶ Xem lại câu chuyện':'↶ Replay the story', '⟳ Góc nhìn ban đầu':'⟳ Reset the view',
+
+ 'Xem lại câu chuyện':'Replay the story', 'Góc nhìn ban đầu':'Reset the view',
  'Đóng thiệp':'Close the card', 'LỜI THƯƠNG':'A LITTLE LOVE',
  'Gửi em, bằng tất cả dịu dàng ♡':'For you, with all my tenderness ♡',
  '← Bông trước':'← Previous flower', 'Bông tiếp →':'Next flower →',

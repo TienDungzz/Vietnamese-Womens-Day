@@ -48,7 +48,7 @@ export function GardenTrees(){
    createTreeBranch([[.08,2.55,.1],[.65,3.25,1],[1.3,3.65,1.6],[2.2,3.85,1.9]],.1,.025),
    createTreeBranch([[.02,2.5,.05],[-.25,3.3,-.7],[-1,3.8,-1.5],[-2,4,-1.9]],.1,.025),
   ];
-  crowns.forEach(([x,y,z],i)=>paths.push(createTreeBranch([[.12,2.8,.1],[x*.35,3.5,z*.35],[x*.75,y-.4,z*.8],[x,y-.1,z]],.065,.012)));
+  crowns.forEach(([x,y,z])=>paths.push(createTreeBranch([[.12,2.8,.1],[x*.35,3.5,z*.35],[x*.75,y-.4,z*.8],[x,y-.1,z]],.065,.012)));
   return paths;
  },[]);
  useLayoutEffect(()=>{

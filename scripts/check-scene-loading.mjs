@@ -32,8 +32,8 @@ try{
  assert(held,'Expected held studio asset request: '+errors.join('\n'));
  await ev('new Promise(r=>setTimeout(r,2500))');
  assert.equal(await ev("!!document.querySelector('.scene-loading')&&document.querySelector('main').inert&&getComputedStyle(document.querySelector('canvas')).visibility==='hidden'"),true);
- await ev("document.querySelector('.intro-actions .primary').click();document.querySelector('.intro-actions .text-button').click()");
- assert.equal(await ev("!!document.querySelector('.intro-actions .primary')&&document.querySelector('main').classList.contains('story')"),true,'Loading actions must not start or skip');
+ await ev("document.querySelector('.app__intro .button--primary').click();document.querySelector('.app__intro .button--text').click()");
+ assert.equal(await ev("!!document.querySelector('.app__intro .button--primary')&&document.querySelector('main').classList.contains('app--story')"),true,'Loading actions must not start or skip');
  assert.equal(models.size,17,'Every story and studio model must start preloading in parallel');
  await store();assert.equal(await ev("!!__qa.getState().scene.getObjectByName('story-man')"),false,'No placeholder actor while an asset is pending');
  await shot('.qa/loading-held.png');
@@ -43,9 +43,9 @@ try{
  assert.equal(await ev("!document.querySelector('main').inert&&getComputedStyle(document.querySelector('canvas')).visibility==='visible'"),true);
  const actor=await ev("__qa.getState().scene.getObjectByName('story-man').uuid");
  assert.equal(await ev("!!__qa.getState().scene.getObjectByName('story-man').getObjectByName('RW_Soft_73_fringe')"),true);
- await ev("document.querySelector('.intro-actions .primary').click()");await ev('new Promise(r=>setTimeout(r,300))');
+ await ev("document.querySelector('.app__intro .button--primary').click()");await ev('new Promise(r=>setTimeout(r,300))');
  assert.equal(await ev("__qa.getState().scene.getObjectByName('story-man').uuid"),actor,'Starting must not rebuild the scene');
- await ev("document.querySelector('.intro-actions .text-button').click()");
+ await ev("document.querySelector('.app__intro .button--text').click()");
  await wait("!!document.querySelector('.rose-picker')&&!document.querySelector('.scene-loading')");
  assert.equal(models.size,17,'Switching to studio must use preloaded assets');
  assert.equal(await ev("document.querySelectorAll('.rose-picker button').length"),10);
@@ -73,7 +73,7 @@ try{
  await wait("!!document.querySelector('canvas')&&!document.querySelector('.scene-loading')",120000);
  assert.equal(models.size,17);assert.equal([...models].filter(u=>/rose-\d-balanced/.test(u)).length,5);assert.equal([...models].some(u=>/rose-\d-high/.test(u)),false);
  assert.equal(await ev('document.documentElement.scrollWidth<=innerWidth'),true);
- await ev("document.querySelector('.intro-actions .text-button').click()");await wait("!!document.querySelector('.rose-picker')&&!document.querySelector('.scene-loading')");
+ await ev("document.querySelector('.app__intro .button--text').click()");await wait("!!document.querySelector('.rose-picker')&&!document.querySelector('.scene-loading')");
  assert.equal(models.size,17);await shot('.qa/loading-mobile-ready.png');
  assert.equal(errors.length,0,errors.join('\n'));
  console.log('PASS: mobile loads its complete detail level, remains within viewport and opens the cached bouquet.');

@@ -6,7 +6,7 @@ import type { Language, Message } from '../i18n';
 // and exposed to assistive technology, so switching cannot resize the slot.
 export function StableText({content}:{content:Record<Language,ReactNode>}){
  const {language}=useLanguage();
- return <span className="stable-text">{(['vi','en'] as const).map(locale=><span key={locale} lang={locale} className="stable-text-layer" data-active={locale===language} aria-hidden={locale!==language}>{content[locale]}</span>)}</span>;
+ return <span className="stable-text">{(['vi','en'] as const).map(locale=><span key={locale} lang={locale} className="stable-text__layer" data-active={locale===language} aria-hidden={locale!==language}>{content[locale]}</span>)}</span>;
 }
 export function TranslatedText({message,values}:{message:Message;values?:Record<string,string|number>}){
  return <StableText content={{vi:translate('vi',message,values),en:translate('en',message,values)}}/>;

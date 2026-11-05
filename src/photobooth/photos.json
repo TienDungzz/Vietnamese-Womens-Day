@@ -1,0 +1,146 @@
+{
+  "mode": "demo",
+  "provider": "Lorem Picsum",
+  "photos": [
+    {
+      "id": "photo-01",
+      "src": "https://picsum.photos/id/10/1600/1067",
+      "thumb": "https://picsum.photos/id/10/320/213",
+      "author": "Paul Jarvis",
+      "source": "https://unsplash.com/photos/6J--NXulQCs"
+    },
+    {
+      "id": "photo-02",
+      "src": "https://picsum.photos/id/11/1600/1067",
+      "thumb": "https://picsum.photos/id/11/320/213",
+      "author": "Paul Jarvis",
+      "source": "https://unsplash.com/photos/Cm7oKel-X2Q"
+    },
+    {
+      "id": "photo-03",
+      "src": "https://picsum.photos/id/12/1600/1067",
+      "thumb": "https://picsum.photos/id/12/320/213",
+      "author": "Paul Jarvis",
+      "source": "https://unsplash.com/photos/I_9ILwtsl_k"
+    },
+    {
+      "id": "photo-04",
+      "src": "https://picsum.photos/id/13/1600/1067",
+      "thumb": "https://picsum.photos/id/13/320/213",
+      "author": "Paul Jarvis",
+      "source": "https://unsplash.com/photos/3MtiSMdnoCo"
+    },
+    {
+      "id": "photo-05",
+      "src": "https://picsum.photos/id/14/1600/1067",
+      "thumb": "https://picsum.photos/id/14/320/213",
+      "author": "Paul Jarvis",
+      "source": "https://unsplash.com/photos/IQ1kOQTJrOQ"
+    },
+    {
+      "id": "photo-06",
+      "src": "https://picsum.photos/id/15/1600/1067",
+      "thumb": "https://picsum.photos/id/15/320/213",
+      "author": "Paul Jarvis",
+      "source": "https://unsplash.com/photos/NYDo21ssGao"
+    },
+    {
+      "id": "photo-07",
+      "src": "https://picsum.photos/id/16/1600/1067",
+      "thumb": "https://picsum.photos/id/16/320/213",
+      "author": "Paul Jarvis",
+      "source": "https://unsplash.com/photos/gkT4FfgHO5o"
+    },
+    {
+      "id": "photo-08",
+      "src": "https://picsum.photos/id/17/1600/1067",
+      "thumb": "https://picsum.photos/id/17/320/213",
+      "author": "Paul Jarvis",
+      "source": "https://unsplash.com/photos/Ven2CV8IJ5A"
+    },
+    {
+      "id": "photo-09",
+      "src": "https://picsum.photos/id/18/1600/1067",
+      "thumb": "https://picsum.photos/id/18/320/213",
+      "author": "Paul Jarvis",
+      "source": "https://unsplash.com/photos/Ps2n0rShqaM"
+    },
+    {
+      "id": "photo-10",
+      "src": "https://picsum.photos/id/19/1600/1067",
+      "thumb": "https://picsum.photos/id/19/320/213",
+      "author": "Paul Jarvis",
+      "source": "https://unsplash.com/photos/P7Lh0usGcuk"
+    },
+    {
+      "id": "photo-11",
+      "src": "https://picsum.photos/id/20/1600/1073",
+      "thumb": "https://picsum.photos/id/20/320/215",
+      "author": "Aleks Dorohovich",
+      "source": "https://unsplash.com/photos/nJdwUHmaY8A"
+    },
+    {
+      "id": "photo-12",
+      "src": "https://picsum.photos/id/21/1600/1068",
+      "thumb": "https://picsum.photos/id/21/320/214",
+      "author": "Alejandro Escamilla",
+      "source": "https://unsplash.com/photos/jVb0mSn0LbE"
+    },
+    {
+      "id": "photo-13",
+      "src": "https://picsum.photos/id/22/1600/1346",
+      "thumb": "https://picsum.photos/id/22/320/269",
+      "author": "Alejandro Escamilla",
+      "source": "https://unsplash.com/photos/du_OrQAA4r0"
+    },
+    {
+      "id": "photo-14",
+      "src": "https://picsum.photos/id/23/1269/1600",
+      "thumb": "https://picsum.photos/id/23/254/320",
+      "author": "Alejandro Escamilla",
+      "source": "https://unsplash.com/photos/8yqds_91OLw"
+    },
+    {
+      "id": "photo-15",
+      "src": "https://picsum.photos/id/24/1600/594",
+      "thumb": "https://picsum.photos/id/24/320/119",
+      "author": "Alejandro Escamilla",
+      "source": "https://unsplash.com/photos/cZhUxIQjILg"
+    },
+    {
+      "id": "photo-16",
+      "src": "https://picsum.photos/id/25/1600/1067",
+      "thumb": "https://picsum.photos/id/25/320/213",
+      "author": "Alejandro Escamilla",
+      "source": "https://unsplash.com/photos/Iuq0EL4EINY"
+    },
+    {
+      "id": "photo-17",
+      "src": "https://picsum.photos/id/26/1600/1053",
+      "thumb": "https://picsum.photos/id/26/320/211",
+      "author": "Vadim Sherbakov",
+      "source": "https://unsplash.com/photos/tCICLJ5ktBE"
+    },
+    {
+      "id": "photo-18",
+      "src": "https://picsum.photos/id/27/1600/900",
+      "thumb": "https://picsum.photos/id/27/320/180",
+      "author": "Yoni Kaplan-Nadel",
+      "source": "https://unsplash.com/photos/iJnZwLBOB1I"
+    },
+    {
+      "id": "photo-19",
+      "src": "https://picsum.photos/id/28/1600/1060",
+      "thumb": "https://picsum.photos/id/28/320/212",
+      "author": "Jerry Adney",
+      "source": "https://unsplash.com/photos/_WiFMBRT7Aw"
+    },
+    {
+      "id": "photo-20",
+      "src": "https://picsum.photos/id/29/1600/1068",
+      "thumb": "https://picsum.photos/id/29/320/214",
+      "author": "Go Wild",
+      "source": "https://unsplash.com/photos/V0yAek6BgGk"
+    }
+  ]
+}
