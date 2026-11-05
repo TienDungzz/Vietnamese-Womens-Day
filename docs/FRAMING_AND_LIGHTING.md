@@ -66,6 +66,8 @@ Trong photobooth dùng cùng `SiteHeader`, giữ logo và chỉ hiện nút đó
 
 StableText xếp VI/EN vào cùng một ô Grid: cả hai góp kích thước, chỉ một bản nhìn thấy và được đọc bởi công nghệ hỗ trợ. Tiêu đề, nút, hướng dẫn và thiệp dành chỗ theo bản dài hơn. Không dùng hiệu ứng chiều cao để che xê dịch; bản ngắn có thể có thêm khoảng trống. Thiệp dài vẫn cuộn.
 
+Thiệp lời chúc dùng nền giấy trắng hồng ở chế độ ngày, lavender đậm ở chế độ đêm; viền mảnh, góc bo và bóng nhẹ. Biểu tượng hoa là SVG nét mảnh, tiêu đề serif và nội dung có nhịp dòng thoáng. Nút đóng trong suốt, hai nút trước/sau dùng viền nhẹ; nút trở lại bó hoa là liên kết chữ. Mobile giữ tối đa 60svh và cuộn khi nội dung dài; cả hai ngôn ngữ vẫn dùng StableText để giữ hình học ổn định.
+
 ## 8. Kiểm tra mỹ thuật
 
 - Thấy rõ nhà, cửa, hướng nam đi; rào/cây không che hành động chính.
