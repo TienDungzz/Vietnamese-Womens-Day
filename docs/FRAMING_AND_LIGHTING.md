@@ -62,6 +62,8 @@ Thiên thể được đặt theo camera và phần Canvas thực sự nằm tro
 
 Header có thương hiệu, dropdown VI/EN, ngày/đêm và âm thanh. Mobile dùng icon cho ngày/đêm và âm thanh. Dropdown có tên ngôn ngữ đầy đủ và dấu chọn; hỗ trợ bàn phím và đóng khi bấm ngoài.
 
+Trong photobooth dùng cùng `SiteHeader`, giữ logo và chỉ hiện nút đóng SVG căn giữa; các nút còn lại ẩn. Mở photobooth bằng cách nhấn trực tiếp lên xấp ảnh, có viền sáng khi hover/focus, không có nút chữ hoặc lời gợi ý riêng. Dòng mô tả ngắn phía dưới tiêu đề mở đầu đã bỏ; cảnh khám phá vẫn có mô tả của bó hoa. Scrollbar toàn trang mảnh, track trong suốt và thumb theo màu nhấn ngày/đêm.
+
 StableText xếp VI/EN vào cùng một ô Grid: cả hai góp kích thước, chỉ một bản nhìn thấy và được đọc bởi công nghệ hỗ trợ. Tiêu đề, nút, hướng dẫn và thiệp dành chỗ theo bản dài hơn. Không dùng hiệu ứng chiều cao để che xê dịch; bản ngắn có thể có thêm khoảng trống. Thiệp dài vẫn cuộn.
 
 ## 8. Kiểm tra mỹ thuật

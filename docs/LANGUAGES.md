@@ -4,6 +4,8 @@
 
 Website có **Tiếng Việt (VI)** và **English (EN)**. Tiếng Việt là mặc định; localStorage rose-language lưu lựa chọn. Đổi ngôn ngữ cập nhật giao diện, lời chúc, aria-label, title trang, meta description và html lang mà không khởi động lại câu chuyện, xóa tiến độ hay đổi hoa đang chọn.
 
+Nếu cấu hình API nội dung, bản dịch title/text của lời chúc và label ảnh lấy từ response API. Câu giao diện vẫn lấy từ i18n.tsx. API có thể trả chuỗi chung hoặc object VI/EN; đổi ngôn ngữ không gửi request lại. Các file wishes.ts/wishes.en.ts là dự phòng khi chưa cấu hình hoặc API lỗi. Xem [CONTENT_API.md](CONTENT_API.md).
+
 Chế độ ngày/đêm và âm thanh là lựa chọn độc lập. Không suy ngôn ngữ từ vị trí địa lý và không gọi API dịch khi chạy.
 
 ## 2. Dữ liệu và thành phần
