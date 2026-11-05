@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "prepare:photos": "node scripts/prepare-photobooth-photos.mjs",
     "check:photobooth": "node scripts/check-photobooth.mjs",
+    "check:api": "node scripts/check-content-api.mjs",
     "check:styles": "node scripts/check-styles.mjs",
     "check": "node scripts/check-styles.mjs && node scripts/check-content.mjs && node scripts/check-models.mjs && node scripts/check-bouquet.mjs && node scripts/check-male.mjs"
   },
