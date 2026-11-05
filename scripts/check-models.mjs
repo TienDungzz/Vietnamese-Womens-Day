@@ -45,9 +45,15 @@ async function visit(file){
  file=path.resolve(file);if(reached.has(file))return;reached.add(file);
  if(!/\.tsx?$/.test(file))return;
  const source=ts.createSourceFile(file,await fs.readFile(file,'utf8'),ts.ScriptTarget.Latest,true);
- for(const statement of source.statements){
-  if(!(ts.isImportDeclaration(statement)||ts.isExportDeclaration(statement))||!statement.moduleSpecifier)continue;
-  const name=statement.moduleSpecifier.text;if(!name.startsWith('.'))continue;
+ const imports=[];
+ function collect(node){
+  if((ts.isImportDeclaration(node)||ts.isExportDeclaration(node))&&node.moduleSpecifier)imports.push(node.moduleSpecifier.text);
+  if(ts.isCallExpression(node)&&node.expression.kind===ts.SyntaxKind.ImportKeyword&&ts.isStringLiteral(node.arguments[0]))imports.push(node.arguments[0].text);
+  ts.forEachChild(node,collect);
+ }
+ collect(source);
+ for(const name of imports){
+  if(!name.startsWith('.'))continue;
   const base=path.resolve(path.dirname(file),name);
   for(const candidate of [base,base+'.ts',base+'.tsx',base+'.json',path.join(base,'index.ts'),path.join(base,'index.tsx')]){
    if(await fs.stat(candidate).then(s=>s.isFile()).catch(()=>false)){await visit(candidate);break;}

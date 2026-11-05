@@ -1,19 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Edges,Html } from '@react-three/drei';
 import { SRGBColorSpace, Texture,TextureLoader } from 'three';
 import { useContent } from '../content/ContentProvider';
 import { useLanguage } from '../i18n';
 
-function FrameHitArea({onOpen,onHighlight,label,inScene=false}:{onOpen:()=>void;onHighlight?:(value:boolean)=>void;label:string;inScene?:boolean}){
- const down=useRef({x:0,y:0});
- return <button className="photo-stack__button" data-in-scene={inScene||undefined} aria-label={label} onPointerDown={event=>{event.stopPropagation();down.current={x:event.clientX,y:event.clientY}}} onClick={event=>{event.stopPropagation();if(event.detail===0||Math.hypot(event.clientX-down.current.x,event.clientY-down.current.y)<5)onOpen()}} onPointerEnter={()=>onHighlight?.(true)} onPointerLeave={()=>onHighlight?.(false)} onFocus={()=>onHighlight?.(true)} onBlur={()=>onHighlight?.(false)}/>;
-}
-export function PhotoFrameFallback({onOpen}:{onOpen:()=>void}){
- const {photos}=useContent();
- const {t}=useLanguage();
- return <div className="photo-stack photo-stack--fallback"><img src={photos[0].thumb} alt=""/><FrameHitArea label={t('20 khoảnh khắc')} onOpen={onOpen}/></div>;
-}
-
+import { FrameHitArea } from './FrameHitArea';
 export function PhotoStack({onOpen}:{onOpen:()=>void}){
  const {photos}=useContent();
  const {t}=useLanguage();

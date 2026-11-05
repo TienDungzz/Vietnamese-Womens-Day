@@ -5,6 +5,8 @@ import { frameBackground,slotBorder,frameFinishing } from './decorations';
 import { specialCaption } from './specialFrames';
 import { shapeFrame,slotPathData } from './shapes';
 const cache=new Map<string,Promise<HTMLImageElement>>();
+const paths=new WeakMap<Slot,Path2D>();
+function photoPath(slot:Slot){let path=paths.get(slot);if(!path){path=new Path2D(slotPathData(slot));paths.set(slot,path)}return path}
 export function releasePhotos(){cache.clear()}
 export function loadPhoto(id:string,catalog:Photo[]=photos){
  const photo=catalog.find(p=>p.id===id);if(!photo)return Promise.reject(Error('Unknown photo'));
@@ -14,7 +16,7 @@ export function loadPhoto(id:string,catalog:Photo[]=photos){
 }
 export function drawPhoto(ctx:CanvasRenderingContext2D,image:HTMLImageElement,slot:Slot,entry:Entry){
  const r=cropRect(image.naturalWidth,image.naturalHeight,slot.width,slot.height,entry);
- ctx.save();ctx.clip(new Path2D(slotPathData(slot)));
+ ctx.save();ctx.clip(photoPath(slot));
  ctx.drawImage(image,r.x,r.y,r.width,r.height,slot.x,slot.y,slot.width,slot.height);
  ctx.restore();
 }
@@ -30,12 +32,12 @@ export function drawFrame(canvas:HTMLCanvasElement,frame:Frame,draft:Draft,image
   ctx.save();if(slot.rotation){ctx.translate(slot.x+slot.width/2,slot.y+slot.height/2);ctx.rotate(slot.rotation);ctx.translate(-slot.x-slot.width/2,-slot.y-slot.height/2)}
   if(!slot.shape||slot.shape==='rect')slotBorder(ctx,slot.x,slot.y,slot.width,slot.height,palette);
   else {
-   const path=new Path2D(slotPathData(slot));ctx.fillStyle=palette.background;ctx.fill(path);
+   const path=photoPath(slot);ctx.fillStyle=palette.background;ctx.fill(path);
    ctx.strokeStyle=palette.id==='film'?'#080807':'#fffdf7';ctx.lineWidth=20;ctx.lineJoin='round';ctx.stroke(path);
    ctx.strokeStyle=palette.accent;ctx.lineWidth=3;ctx.stroke(path);
   }
   const entry=draft.entries[index],image=entry?images.get(entry.photoId):undefined;
-  if(entry&&image)drawPhoto(ctx,image,slot,entry);else{ctx.save();ctx.clip(new Path2D(slotPathData(slot)));ctx.fillStyle=palette.background;ctx.fillRect(slot.x,slot.y,slot.width,slot.height);ctx.fillStyle=palette.line;ctx.font='42px Georgia,serif';ctx.fillText(String(index+1).padStart(2,'0'),slot.x+slot.width/2,slot.y+slot.height/2+15);ctx.restore()}
+  if(entry&&image)drawPhoto(ctx,image,slot,entry);else{ctx.save();ctx.clip(photoPath(slot));ctx.fillStyle=palette.background;ctx.fillRect(slot.x,slot.y,slot.width,slot.height);ctx.fillStyle=palette.line;ctx.font='42px Georgia,serif';ctx.fillText(String(index+1).padStart(2,'0'),slot.x+slot.width/2,slot.y+slot.height/2+15);ctx.restore()}
   ctx.restore();
  });
  frameFinishing(ctx,frame,palette);

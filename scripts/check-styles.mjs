@@ -21,7 +21,7 @@ for(const file of files){
  visit(source);
 }
 let rules=0;
-for(const file of ['src/styles/global.css','src/photobooth/photobooth.css']){
+for(const file of ['src/styles/global.css','src/photobooth/photobooth.css','src/photobooth/photo-stack.css']){
  const root=postcss.parse(await fs.readFile(file,'utf8'),{from:file});
  root.walkRules(rule=>{
   rules++;

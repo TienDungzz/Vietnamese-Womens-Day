@@ -1,0 +1,52 @@
+.app .photo-stack__button {
+  display: block;
+  width: 344px;
+  height: 416px;
+  min-height: 0;
+  padding: 0;
+  border: 3px solid #d7a0b355;
+  border-radius: 2px;
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: border-color .2s,box-shadow .2s;
+}
+.app .photo-stack__button:hover,.app .photo-stack__button:focus-visible {
+  background: transparent;
+  border-color: #ffd2e1;
+  box-shadow: 0 0 20px #efacc58c;
+  outline: none;
+}
+/* The scene outline belongs to the mesh; the DOM button only handles input. */
+.app .photo-stack__button[data-in-scene],.app .photo-stack__button[data-in-scene]:hover,.app .photo-stack__button[data-in-scene]:focus-visible {
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
+  background: transparent;
+}
+.photo-stack--fallback {
+  position: absolute;
+  right: 12%;
+  bottom: 12%;
+  width: 86px;
+  height: 104px;
+  background: #fff6e8;
+  padding: 8px 8px 23px;
+  transform: rotate(-9deg);
+  box-shadow: -5px 3px 0 #eadccb,-9px 6px 0 #d8c9b8,0 8px 24px #21131d33;
+}
+.photo-stack--fallback>img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  max-width: none;
+  object-fit: cover;
+}
+.app .photo-stack--fallback .photo-stack__button {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}

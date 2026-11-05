@@ -1,4 +1,7 @@
-import photoCatalog from './photos.json';
+import { photos } from './photoCatalog';
+import type { Photo } from './photoCatalog';
+export { photos,photoSource } from './photoCatalog';
+export type { Photo } from './photoCatalog';
 import { shapeOptions } from './shapes';
 import type { PhotoShape,ShapeChoice } from './shapes';
 export type Slot={x:number;y:number;width:number;height:number;rotation?:number;shape?:PhotoShape};
@@ -61,9 +64,6 @@ export const palettes=[
  {id:'postcard',name:{vi:'Bưu thiếp gửi em',en:'A postcard for you'},background:'#fbf5e9',ink:'#624b4a',accent:'#ae555d',line:'#8fa8b5'},
 ] as const;
 export type FrameStyle=typeof palettes[number];
-export type Photo={id:string;src:string;thumb:string;label:{vi:string;en:string}};
-export const photoSource=photoCatalog.mode;
-export const photos:Photo[]=photoCatalog.photos.map((photo,i)=>{const n=String(i+1).padStart(2,'0');return {...photo,label:{vi:`Khoảnh khắc ${n}`,en:`Memory ${n}`}}});
 export type Entry={photoId:string;x:number;y:number;zoom:number};
 export type Draft={frameId:string;paletteId:string;shapeId?:ShapeChoice;entries:(Entry|null)[]};
 export const blankDraft=():Draft=>({frameId:'grid-4',paletteId:'cream',shapeId:'layout',entries:Array(20).fill(null)});

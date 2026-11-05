@@ -36,7 +36,7 @@ export function Photobooth({open,onClose,dark}:{open:boolean;onClose:()=>void;da
  const ready=filled===frame.count&&ids.every(id=>images.has(id))&&failures.length===0;
  const updateEntry=(value:Entry|null)=>setDraft(d=>({...d,entries:d.entries.map((e,i)=>i===active?value:e)}));
  useEffect(()=>{try{sessionStorage.setItem('rose-photobooth',JSON.stringify(draft))}catch{}},[draft]);
- useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;for(const url of downloadUrls.current)URL.revokeObjectURL(url)}},[]);
+ useEffect(()=>{mounted.current=true;return()=>{mounted.current=false;releasePhotos();for(const url of downloadUrls.current)URL.revokeObjectURL(url)}},[]);
  useEffect(()=>{if(!open){setImages(new Map());setFailures([]);releasePhotos()}},[open]);
  useEffect(()=>{
   if(!open)return;const previousOverflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.current?.querySelector<HTMLButtonElement>('.site-header__close')?.focus();
@@ -56,7 +56,11 @@ export function Photobooth({open,onClose,dark}:{open:boolean;onClose:()=>void;da
   void Promise.allSettled(ids.map(id=>loadPhoto(id,photos))).then(results=>{if(cancelled)return;const next=new Map<string,HTMLImageElement>(),errors:string[]=[];results.forEach((result,i)=>{if(result.status==='fulfilled')next.set(ids[i],result.value);else errors.push(ids[i])});setImages(next);setFailures(errors)});
   return()=>{cancelled=true};
  },[open,idsKey,retry,photos]);
- useEffect(()=>{if(open&&preview.current)drawFrame(preview.current,frame,draft,images,language,Math.min(840,frame.width))},[open,frame,draft,images,language]);
+ useEffect(()=>{
+  if(!open)return;
+  const tick=requestAnimationFrame(()=>{if(preview.current)drawFrame(preview.current,frame,draft,images,language,Math.min(840,frame.width))});
+  return()=>cancelAnimationFrame(tick);
+ },[open,frame,draft,images,language]);
  useEffect(()=>{
   if(!editor||!entry||!cropCanvas.current)return;const c=cropCanvas.current,image=images.get(entry.photoId);c.width=700;c.height=Math.round(700*frame.slots[active].height/frame.slots[active].width);const ctx=c.getContext('2d')!;ctx.fillStyle=palette.background;ctx.fill(new Path2D(slotPathData({x:0,y:0,width:c.width,height:c.height,shape:frame.slots[active].shape})));if(image)drawPhoto(ctx,image,{x:0,y:0,width:c.width,height:c.height,shape:frame.slots[active].shape},entry);
  },[editor,entry,images,frame,active,palette]);

@@ -4,9 +4,9 @@ if(screenshots)fs.mkdirSync('.qa',{recursive:true});
 import assert from 'node:assert/strict';
 const response=await fetch('http://127.0.0.1:5173/');assert(response.ok,'Dev server is unavailable');
 const pages=await(await fetch('http://127.0.0.1:9222/json')).json();
-const socket=new WebSocket(pages[0].webSocketDebuggerUrl);await new Promise(r=>socket.onopen=r);
+const socket=new WebSocket(pages.find(page=>page.type==='page').webSocketDebuggerUrl);await new Promise(r=>socket.onopen=r);
 let id=0,phase='desktop',held=null;const heldRequests=new Set();const pending=new Map(),models=new Set(),errors=[];
-const send=(method,params={})=>new Promise((resolve,reject)=>{const n=++id;pending.set(n,{resolve,reject});socket.send(JSON.stringify({id:n,method,params}))});
+const send=(method,params={})=>new Promise((resolve,reject)=>{if(socket.readyState!==WebSocket.OPEN){reject(Error('Browser closed'));return}const n=++id;pending.set(n,{resolve,reject});socket.send(JSON.stringify({id:n,method,params}))});
 socket.onmessage=e=>{const v=JSON.parse(e.data);
  if(v.method==='Fetch.requestPaused'){
   if(phase==='failure')void send('Fetch.failRequest',{requestId:v.params.requestId,errorReason:'Failed'});

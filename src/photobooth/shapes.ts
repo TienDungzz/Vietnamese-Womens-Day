@@ -12,6 +12,9 @@ export type ShapeChoice=typeof shapeOptions[number]['id'];
 export type PhotoShape=Exclude<ShapeChoice,'layout'>|'rect';
 type Point=[number,number];
 const cache=new Map<PhotoShape,Point[]>();
+const paths=new WeakMap<Slot,string>();
+const clips=new WeakMap<Slot,string>();
+const shapedFrames=new WeakMap<Frame,Map<ShapeChoice,Frame>>();
 
 function curves(start:Point,segments:number[][]):Point[]{
  const points:Point[]=[start];let from=start;
@@ -32,10 +35,14 @@ export function shapePoints(shape:PhotoShape='rect'):Point[]{
  cache.set(shape,p);return p;
 }
 export function slotPathData(slot:Slot){
- return shapePoints(slot.shape).map(([x,y],i)=>`${i?'L':'M'}${(slot.x+x*slot.width).toFixed(3)} ${(slot.y+y*slot.height).toFixed(3)}`).join(' ')+' Z';
+ let path=paths.get(slot);
+ if(!path){path=shapePoints(slot.shape).map(([x,y],i)=>`${i?'L':'M'}${(slot.x+x*slot.width).toFixed(3)} ${(slot.y+y*slot.height).toFixed(3)}`).join(' ')+' Z';paths.set(slot,path)}
+ return path;
 }
 export function slotClipPath(slot:Slot){
- return `polygon(${shapePoints(slot.shape).map(([x,y])=>`${(x*100).toFixed(3)}% ${(y*100).toFixed(3)}%`).join(',')})`;
+ let clip=clips.get(slot);
+ if(!clip){clip=`polygon(${shapePoints(slot.shape).map(([x,y])=>`${(x*100).toFixed(3)}% ${(y*100).toFixed(3)}%`).join(',')})`;clips.set(slot,clip)}
+ return clip;
 }
 export function resolveSlot(slot:Slot,choice:ShapeChoice='layout'):Slot{
  const shape=choice==='layout'?slot.shape??'rect':choice;
@@ -45,5 +52,7 @@ export function resolveSlot(slot:Slot,choice:ShapeChoice='layout'):Slot{
  return {...slot,shape,x:slot.x+(slot.width-width)/2,y:slot.y+(slot.height-height)/2,width,height};
 }
 export function shapeFrame(frame:Frame,choice:ShapeChoice='layout'):Frame{
- return {...frame,slots:frame.slots.map(s=>resolveSlot(s,choice))};
+ let variants=shapedFrames.get(frame);if(!variants){variants=new Map();shapedFrames.set(frame,variants)}
+ let result=variants.get(choice);if(!result){result={...frame,slots:frame.slots.map(s=>resolveSlot(s,choice))};variants.set(choice,result)}
+ return result;
 }
