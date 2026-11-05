@@ -41,25 +41,18 @@ try{
   artwork.add(await ev("document.querySelector('.photobooth__paper canvas').toDataURL()"));
  }
  assert.equal(artwork.size,8,'Each frame style must produce distinct artwork');
- // Shape controls preserve photos, expose matching hit masks and clip pixels.
+ // Only authored layouts remain; legacy shape overrides are ignored.
  const styleThumbnails=await ev("[...document.querySelectorAll('.photobooth__styles canvas')].map(c=>c.toDataURL())");
- const shapeDraft=await ev("JSON.parse(sessionStorage.getItem('rose-photobooth')).entries");
- for(const shape of ['heart','cloud','oval','arch','flower']){
-  await ev(`document.querySelector('[data-photo-shape=${shape}]').click()`);
-  await wait(`document.querySelector('.photobooth__slot').dataset.shape==='${shape}'`);
-  assert.deepEqual(await ev("JSON.parse(sessionStorage.getItem('rose-photobooth')).entries"),shapeDraft);
-  assert.deepEqual(await ev("[...document.querySelectorAll('.photobooth__styles canvas')].map(c=>c.toDataURL())"),styleThumbnails,'Frame thumbnails must not show the selected photo layout');
-  assert.equal(await ev("getComputedStyle(document.querySelector('.photobooth__slot')).clipPath.startsWith('polygon(')"),true);
- }
- const shapePixels=await ev("(async()=>{const {drawPhoto}=await import('/src/photobooth/render.ts');const source=document.createElement('canvas');source.width=source.height=20;source.getContext('2d').fillRect(0,0,20,20);const image=new Image();image.src=source.toDataURL();await image.decode();for(const shape of ['heart','cloud','oval','arch','flower']){const c=document.createElement('canvas');c.width=c.height=200;const x=c.getContext('2d');drawPhoto(x,image,{x:0,y:0,width:200,height:200,shape},{photoId:'test',x:0,y:0,zoom:1});if(x.getImageData(1,1,1,1).data[3]!==0||x.getImageData(100,100,1,1).data[3]!==255)throw Error('Bad clipping '+shape)}return true})()");assert(shapePixels);
- await ev("document.querySelector('[data-photo-shape=heart]').click()");
- await wait("document.querySelector('.photobooth__slot').dataset.shape==='heart'");
- await ev("document.querySelector('.photobooth__slot').click()");await wait("!!document.querySelector('.photo-editor')");
+ assert.equal(await ev("document.querySelectorAll('[data-photo-shape]').length"),0);
+ assert.equal(await ev("(async()=>{const {readDraft}=await import('/src/photobooth/data.ts');const original=sessionStorage.getItem('rose-photobooth');const d=JSON.parse(original);sessionStorage.setItem('rose-photobooth',JSON.stringify({...d,shapeId:'heart'}));const restored=readDraft();sessionStorage.setItem('rose-photobooth',original);return !('shapeId' in restored)&&JSON.stringify(restored.entries)===JSON.stringify(d.entries)})()"),true);
+ const shapePixels=await ev("(async()=>{const {drawPhoto}=await import('/src/photobooth/render.ts');const source=document.createElement('canvas');source.width=source.height=20;source.getContext('2d').fillRect(0,0,20,20);const image=new Image();image.src=source.toDataURL();await image.decode();for(const shape of ['heart','oval','arch','flower']){const c=document.createElement('canvas');c.width=c.height=200;const x=c.getContext('2d');drawPhoto(x,image,{x:0,y:0,width:200,height:200,shape},{photoId:'test',x:0,y:0,zoom:1});if(x.getImageData(1,1,1,1).data[3]!==0||x.getImageData(100,100,1,1).data[3]!==255)throw Error('Bad clipping '+shape)}return true})()");assert(shapePixels);
+ await ev("document.querySelector('[data-frame=petals-8]').click()");
+ await wait("document.querySelectorAll('.photobooth__slot')[1].dataset.shape==='heart'");
+ await ev("document.querySelectorAll('.photobooth__slot')[1].click()");await wait("!!document.querySelector('.photo-editor')");
  await ev('new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))');
- assert.equal(await ev("document.querySelector('.photo-editor canvas').getContext('2d').getImageData(1,1,1,1).data[3]"),0,'Crop editor must use the heart mask');
+ assert.equal(await ev("document.querySelector('.photo-editor canvas').getContext('2d').getImageData(1,1,1,1).data[3]"),0);
  await ev("document.querySelector('.photo-editor__done').click()");await wait("!document.querySelector('.photo-editor')");
- await ev("document.querySelector('[data-photo-shape=layout]').click()");
- await wait("JSON.parse(sessionStorage.getItem('rose-photobooth')).shapeId==='layout'");
+ await ev("document.querySelector('[data-frame=grid-4]').click()");
  // Clicking a filled slot opens crop; Escape returns focus to that slot.
  await ev("document.querySelectorAll('.photobooth__slot')[0].click()");await wait("!!document.querySelector('.photo-editor')");
  await ev("(()=>{const input=document.querySelector('.photo-editor__sliders input');Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(input,'1.7');input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}))})()");

@@ -101,7 +101,7 @@ Danh sách cuối cùng ưu tiên nhiều ảnh hơn các phương án đầu. *
 
 Mẫu **20 ảnh** là điểm nhấn gắn với ngày 20/10. Không ép tất cả mẫu dùng cùng một tỷ lệ thành phẩm: dải photobooth cần dáng dài, lưới cần tỷ lệ phù hợp để ảnh không quá nhỏ.
 
-Trong phần bố cục có bộ chọn hình dạng áp dụng cho toàn bộ ảnh: theo thiết kế gốc, trái tim, đám mây, tròn, vòm và cánh hoa. `shapes.ts` định nghĩa đường bao chung cho Canvas, thumbnail SVG, clip-path của vùng bấm và popup crop. Hình được giữ tỷ lệ rồi đặt vừa trong ô gốc để tránh kéo méo hoặc chồng ảnh; thay hình giữ ID ảnh, zoom và vị trí crop tương đối. Draft lưu `shapeId`, bản nháp cũ mặc định `layout`. Không vẽ viền chữ nhật hoặc họa tiết góc chữ nhật quanh các ô đã đổi hình.
+Chỉ giữ bố cục theo thiết kế gốc (nhóm As designed trước đây); không còn bộ chọn ép toàn bộ ảnh sang Hearts/Clouds/Circles/Arches/Petals. Hình dạng đã thiết kế trong từng bố cục vẫn giữ nguyên. `shapes.ts` định nghĩa đường bao chung cho Canvas, thumbnail SVG, clip-path của vùng bấm và popup crop; hình được giữ tỷ lệ và đặt vừa trong ô. Draft chỉ lưu bố cục/frame/ảnh/crop; trường `shapeId` cũ được bỏ qua khi đọc để khôi phục đúng thiết kế gốc mà không mất ảnh đã chọn.
 
 Mỗi bố cục có tám phong cách frame để chọn bằng thumbnail thay cho nút chọn màu:
 

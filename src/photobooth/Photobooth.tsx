@@ -6,7 +6,7 @@ import { frames,palettes,readDraft,cropRect } from './data';
 import type { Entry,Frame } from './data';
 import { drawFrame,drawPhoto,exportFrame,loadPhoto,releasePhotos } from './render';
 import './photobooth.css';
-import { shapeOptions,shapeFrame,slotPathData,slotClipPath } from './shapes';
+import { shapeFrame,slotPathData,slotClipPath } from './shapes';
 
 const stylePreviewFrame:Frame={id:'style-preview',count:0,width:1600,height:2000,slots:[]};
 function FrameStylePreview({id}:{id:string}){
@@ -29,7 +29,7 @@ export function Photobooth({open,onClose,dark}:{open:boolean;onClose:()=>void;da
  const dialog=useRef<HTMLDivElement>(null),preview=useRef<HTMLCanvasElement>(null),cropCanvas=useRef<HTMLCanvasElement>(null),drag=useRef<{x:number;y:number;entry:Entry}|null>(null);
  const mounted=useRef(true),exportLock=useRef(false),downloadUrls=useRef(new Set<string>());
  const layout=frames.find(f=>f.id===draft.frameId)!;
- const frame=useMemo(()=>shapeFrame(layout,draft.shapeId),[layout,draft.shapeId]);
+ const frame=useMemo(()=>shapeFrame(layout),[layout]);
  const palette=palettes.find(p=>p.id===draft.paletteId)??palettes[0],entry=draft.entries[active];
  const ids=[...new Set(draft.entries.slice(0,frame.count).flatMap(e=>e?[e.photoId]:[]))],idsKey=ids.join(',');
  const filled=draft.entries.slice(0,frame.count).filter(Boolean).length;
@@ -100,8 +100,7 @@ export function Photobooth({open,onClose,dark}:{open:boolean;onClose:()=>void;da
 
      <div id="pb-layout-options" className="photobooth__layout-options">
      <div className="photobooth__filters" aria-label={text('Số ảnh trong khung','Photos per frame')}>{[0,3,6,12,20].map((value,i)=><button key={value} aria-pressed={filter===value} onClick={()=>setFilter(value)}>{i===0?text('Tất cả','All'):['','2–3','4–6','8–12','16–20'][i]}</button>)}</div>
-     <div className="photobooth__shape-options" role="group" aria-label={text('Hình dạng ô ảnh','Photo shapes')}>{shapeOptions.map(option=><button key={option.id} className="photobooth__shape-choice" data-photo-shape={option.id} aria-label={option.name[language]} title={option.name[language]} aria-pressed={(draft.shapeId??'layout')===option.id} onClick={()=>setDraft(d=>({...d,shapeId:option.id}))}><svg viewBox="0 0 100 100" aria-hidden="true"><path d={slotPathData({x:3,y:3,width:94,height:94,shape:option.id==='layout'?'rect':option.id})}/></svg><span>{option.name[language]}</span></button>)}</div>
-     <div className="photobooth__layouts">{frames.filter(f=>filter===0||(filter===3?f.count<=3:filter===6?f.count>=4&&f.count<=6:filter===12?f.count>=8&&f.count<=12:f.count>=16)).map(f=><button className="photobooth__layout" key={f.id} data-frame={f.id} aria-pressed={frame.id===f.id} onClick={()=>{setDraft(d=>({...d,frameId:f.id}));setActive(Math.max(0,draft.entries.slice(0,f.count).findIndex(e=>!e)));setEditor(false);setLayoutsOpen(false)}}><svg className="photobooth__layout-preview" viewBox={`0 0 ${f.width} ${f.height}`} style={{aspectRatio:`${f.width}/${f.height}`}} aria-hidden="true">{shapeFrame(f,draft.shapeId).slots.map((s,i)=><path key={i} d={slotPathData(s)} transform={s.rotation?`rotate(${s.rotation*180/Math.PI} ${s.x+s.width/2} ${s.y+s.height/2})`:undefined}/>)}</svg><small>{f.count} {text('ảnh','photos')}</small></button>)}</div>
+     <div className="photobooth__layouts">{frames.filter(f=>filter===0||(filter===3?f.count<=3:filter===6?f.count>=4&&f.count<=6:filter===12?f.count>=8&&f.count<=12:f.count>=16)).map(f=><button className="photobooth__layout" key={f.id} data-frame={f.id} aria-pressed={frame.id===f.id} onClick={()=>{setDraft(d=>({...d,frameId:f.id}));setActive(Math.max(0,draft.entries.slice(0,f.count).findIndex(e=>!e)));setEditor(false);setLayoutsOpen(false)}}><svg className="photobooth__layout-preview" viewBox={`0 0 ${f.width} ${f.height}`} style={{aspectRatio:`${f.width}/${f.height}`}} aria-hidden="true">{shapeFrame(f).slots.map((s,i)=><path key={i} d={slotPathData(s)} transform={s.rotation?`rotate(${s.rotation*180/Math.PI} ${s.x+s.width/2} ${s.y+s.height/2})`:undefined}/>)}</svg><small>{f.count} {text('ảnh','photos')}</small></button>)}</div>
      </div>
 
      <div id="pb-style-options" className="photobooth__styles" aria-label={text('Phong cách khung ảnh','Frame styles')}>{palettes.map(p=><button key={p.id} data-style={p.id} aria-pressed={p.id===draft.paletteId} onClick={()=>{setDraft(d=>({...d,paletteId:p.id}));setStylesOpen(false)}}><FrameStylePreview id={p.id}/><span>{p.name[language]}</span><small>{p.id===draft.paletteId?text('Đang chọn','Selected'):text('Xem frame','Try frame')}</small></button>)}</div>

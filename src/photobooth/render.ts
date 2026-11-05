@@ -21,7 +21,7 @@ export function drawPhoto(ctx:CanvasRenderingContext2D,image:HTMLImageElement,sl
  ctx.restore();
 }
 export function drawFrame(canvas:HTMLCanvasElement,frame:Frame,draft:Draft,images:Map<string,HTMLImageElement>,language:Language,width:number){
- frame=shapeFrame(frame,draft.shapeId);
+ frame=shapeFrame(frame);
  canvas.width=width;canvas.height=Math.round(width*frame.height/frame.width);
  const ctx=canvas.getContext('2d');if(!ctx)throw Error('Canvas is unavailable');
  ctx.scale(width/frame.width,width/frame.width);

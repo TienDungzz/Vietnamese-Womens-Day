@@ -2,8 +2,7 @@ import { photos } from './photoCatalog';
 import type { Photo } from './photoCatalog';
 export { photos,photoSource } from './photoCatalog';
 export type { Photo } from './photoCatalog';
-import { shapeOptions } from './shapes';
-import type { PhotoShape,ShapeChoice } from './shapes';
+import type { PhotoShape } from './shapes';
 export type Slot={x:number;y:number;width:number;height:number;rotation?:number;shape?:PhotoShape};
 export type Frame={id:string;count:number;width:number;height:number;slots:Slot[]};
 function grid(columns:number,rows:number,width=1600,height=2000,gap=28):Slot[]{
@@ -65,11 +64,11 @@ export const palettes=[
 ] as const;
 export type FrameStyle=typeof palettes[number];
 export type Entry={photoId:string;x:number;y:number;zoom:number};
-export type Draft={frameId:string;paletteId:string;shapeId?:ShapeChoice;entries:(Entry|null)[]};
-export const blankDraft=():Draft=>({frameId:'grid-4',paletteId:'cream',shapeId:'layout',entries:Array(20).fill(null)});
+export type Draft={frameId:string;paletteId:string;entries:(Entry|null)[]};
+export const blankDraft=():Draft=>({frameId:'grid-4',paletteId:'cream',entries:Array(20).fill(null)});
 export function readDraft(catalog:Photo[]=photos):Draft{
  try{const d=JSON.parse(sessionStorage.getItem('rose-photobooth')||'null');if(!d)return blankDraft();
-  return {shapeId:shapeOptions.find(s=>s.id===d.shapeId)?.id??'layout',frameId:frames.some(f=>f.id===d.frameId)?d.frameId:'grid-4',paletteId:palettes.some(p=>p.id===d.paletteId)?d.paletteId:'cream',entries:Array.from({length:20},(_,i)=>{const e=d.entries?.[i];return e&&catalog.some(p=>p.id===e.photoId)?{photoId:e.photoId,x:Number.isFinite(e.x)?Math.max(-1,Math.min(1,e.x)):0,y:Number.isFinite(e.y)?Math.max(-1,Math.min(1,e.y)):0,zoom:Number.isFinite(e.zoom)?Math.max(1,Math.min(3,e.zoom)):1}:null})};
+  return {frameId:frames.some(f=>f.id===d.frameId)?d.frameId:'grid-4',paletteId:palettes.some(p=>p.id===d.paletteId)?d.paletteId:'cream',entries:Array.from({length:20},(_,i)=>{const e=d.entries?.[i];return e&&catalog.some(p=>p.id===e.photoId)?{photoId:e.photoId,x:Number.isFinite(e.x)?Math.max(-1,Math.min(1,e.x)):0,y:Number.isFinite(e.y)?Math.max(-1,Math.min(1,e.y)):0,zoom:Number.isFinite(e.zoom)?Math.max(1,Math.min(3,e.zoom)):1}:null})};
  }catch{return blankDraft()}
 }
 export function cropRect(imageWidth:number,imageHeight:number,width:number,height:number,entry:Entry){
