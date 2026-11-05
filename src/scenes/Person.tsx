@@ -6,10 +6,10 @@ import { AnimationMixer, Bone, Group, Mesh, Quaternion, Vector3 } from 'three';
 import { clone } from 'three/examples/jsm/utils/SkeletonUtils.js';
 import { maleModelUrl, femaleModelUrl } from '../sceneAssets';
 
-type Props={female?:boolean;walking?:boolean;arm?:RefObject<Group|null>;reduced?:boolean;holding?:boolean;knocking?:boolean;grip?:RefObject<Group|null>;holdWeight?:RefObject<number>;pace?:RefObject<number>;onReady?:()=>void};
+type Props={female?:boolean;walking?:boolean;arm?:RefObject<Group|null>;reduced?:boolean;holding?:boolean;knocking?:boolean;grip?:RefObject<Group|null>;holdWeight?:RefObject<number>;pace?:RefObject<number>;onReady?:()=>void;onReceiveReady?:()=>void};
 export function Person(props:Props){return <RiggedPerson {...props}/>;}
 
-function RiggedPerson({female=false,walking=false,reduced=false,holding=true,knocking=false,grip,holdWeight,pace,onReady}:Props){
+function RiggedPerson({female=false,walking=false,reduced=false,holding=true,knocking=false,grip,holdWeight,pace,onReady,onReceiveReady}:Props){
  const gltf=useGLTF(female?femaleModelUrl:maleModelUrl),group=useRef<Group>(null);
  const scene=useMemo(()=>{
   const copy=clone(gltf.scene);
@@ -25,8 +25,10 @@ function RiggedPerson({female=false,walking=false,reduced=false,holding=true,kno
  // The local mixer and bindings are garbage-collected with this character.
  useEffect(()=>()=>{mixer.stopAllAction()},[mixer]);
  const bones=useMemo(()=>({left:[scene.getObjectByName('upperarm_l'),scene.getObjectByName('lowerarm_l'),scene.getObjectByName('hand_l')],right:[scene.getObjectByName('upperarm_r'),scene.getObjectByName('lowerarm_r'),scene.getObjectByName('hand_r')]}),[scene]);
+ const armRest=useMemo(()=>[...bones.left,...bones.right].flatMap(bone=>bone?[{bone,rotation:bone.quaternion.clone()}]:[]),[bones]);
  const solver=useMemo(()=>({target:new Vector3(),offset:new Vector3(),orient:new Quaternion(),joint:new Vector3(),end:new Vector3(),from:new Vector3(),to:new Vector3(),turn:new Quaternion(),world:new Quaternion(),parent:new Quaternion()}),[]);
  const pose=useRef(holdWeight?.current??(holding?1:0)),knockPose=useRef(0);
+ const receiveReadySent=useRef(false);
  useEffect(()=>{onReady?.()},[onReady]);
  useEffect(()=>{
   const action=actions[walking&&!reduced?'Walk_Relaxed':'Idle_Standing'];
@@ -37,13 +39,15 @@ function RiggedPerson({female=false,walking=false,reduced=false,holding=true,kno
   if(!group.current)return;
   // Apply the authored animation first, then IK in the same callback; the mixer
   // must never overwrite the solved arms later in the frame.
-  const step=Math.min(dt,.05);
+  // Some clips do not key every arm bone. Remove last frame's IK first so
+  // unkeyed joints cannot accumulate the solver's rotations across frames.
+  for(const {bone,rotation} of armRest)bone.quaternion.copy(rotation);
   // Measured forward foot excursion for the revised rig at the actor's 0.96 scale.
   if(walking&&pace&&actions.Walk_Relaxed)actions.Walk_Relaxed.timeScale+=(Math.max(.25,pace.current/.7065)-actions.Walk_Relaxed.timeScale)*(1-Math.exp(-dt*7));
   mixer.update(dt);
   const desired=knocking?1:holdWeight?.current??(holding?1:0);
-  pose.current+=(desired-pose.current)*(1-Math.exp(-step*(reduced?100:6)));
-  knockPose.current+=((knocking?1:0)-knockPose.current)*(1-Math.exp(-step*7));
+  pose.current+=(desired-pose.current)*(1-Math.exp(-dt*(reduced?100:6)));
+  knockPose.current+=((knocking?1:0)-knockPose.current)*(1-Math.exp(-dt*7));
   // Keep the authored leg/spine animation; solve both arms toward the bouquet.
   const strength=pose.current;if(strength<.001)return;
   for(const [side,chain] of [[1,bones.left],[-1,bones.right]] as const){
@@ -67,6 +71,8 @@ function RiggedPerson({female=false,walking=false,reduced=false,holding=true,kno
     joint.quaternion.slerp(solver.world,strength*.75);
    }
   }
+  // Signal the rendered receiving pose, not merely that the GLB has loaded.
+  if(female&&!receiveReadySent.current&&strength>=.68&&desired>=.7){receiveReadySent.current=true;onReceiveReady?.()}
  });
  return <group ref={group} name="rigged-character"><primitive object={scene} scale={female?.94:.96}/></group>;
 }
