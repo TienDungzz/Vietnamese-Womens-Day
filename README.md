@@ -35,6 +35,7 @@ Vite in địa chỉ truy cập trong terminal, thông thường là http://loca
 | [Công cụ cục bộ](docs/LOCAL_3D_TOOLS.md) | Blender, MCP và quy trình làm việc |
 | [Quản lý tài nguyên](docs/PROJECT_CLEANUP.md) | Tệp phải giữ, cache và lịch sử dọn |
 | [Quy ước BEM và rà soát mã dư](docs/CODE_STYLE.md) | Block/element/modifier, CSS và kiểm tra mã không dùng |
+| [Hiệu năng](docs/PERFORMANCE.md) | Số đo bundle, tải theo nhu cầu, cache và kiểm tra hồi quy |
 | [Nguồn bó hoa](art/bouquet/README.md) | Bản Blender, recipe và đóng gói |
 | [Nguồn nhân vật](art/characters/README.md) | Bản nam/nữ và xuất GLB |
 | [Logo và favicon](art/branding/README.md) | Nguồn ảnh, kích thước và lệnh xuất biểu tượng |

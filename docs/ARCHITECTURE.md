@@ -2,16 +2,18 @@
 
 ## 1. Công nghệ và điểm vào
 
-React 19, TypeScript, Vite 6, Three.js, React Three Fiber và Drei. src/main.tsx gắn React root, LanguageProvider, App, Canvas và phần UI. package.json/package-lock.json là nguồn phiên bản dependency; không cần Blender để build frontend.
+React 19, TypeScript, Vite 6, Three.js, React Three Fiber và Drei. src/main.tsx gắn React root, LanguageProvider, ContentProvider, App và UI; Canvas nằm trong Scene3D tải động. package.json/package-lock.json là nguồn phiên bản dependency; không cần Blender để build frontend.
 
 | Vị trí | Trách nhiệm |
 | --- | --- |
-| src/main.tsx | Header, tiêu đề, lựa chọn hoa, thiệp, fallback, CameraRig, boundary |
+| src/main.tsx | Header, tiêu đề, lựa chọn hoa, thiệp, fallback, boundary và import động |
+| src/components/Scene3D.tsx | Chunk 3D tải riêng: Canvas, cảnh, mô hình, điều khiển và CameraRig |
 | src/components/SiteHeader.tsx | Header chung; chế độ photobooth chỉ hiện logo và nút đóng |
 | src/hooks/useSceneFlow.ts | Trạng thái và timer câu chuyện |
 | src/hooks/useDayNight.ts | Tiến trình ngày/đêm dùng chung CSS và 3D |
 | src/sceneAssets.ts | URL GLB và mức chi tiết |
-| src/components/SceneLoading.tsx | Suspense, chuẩn bị GPU, overlay |
+| src/components/SceneLoading.tsx | Suspense và chuẩn bị GPU trong chunk 3D |
+| src/components/SceneLoadingOverlay.tsx | Overlay 2D dùng chung, không phụ thuộc Three |
 | src/scenes/Story.tsx | Lắp cảnh, di chuyển nam và trao hoa |
 | src/scenes/Person.tsx | Clone rig, AnimationMixer, IK |
 | src/components/Bouquet.tsx, ModelRose.tsx | Lắp 10 hoa, phụ kiện, vật liệu và chọn |
@@ -19,7 +21,7 @@ React 19, TypeScript, Vite 6, Three.js, React Three Fiber và Drei. src/main.tsx
 | src/i18n.tsx | Context ngôn ngữ và bảng dịch |
 | src/components/LanguageSelect.tsx, StableText.tsx | Dropdown và bố cục bản dịch |
 | src/styles/global.css | Responsive, mặt nạ, màu và UI |
-| src/photobooth/ | Dữ liệu 12 khung/20 ảnh, trình ghép, xấp ảnh 3D và xuất PNG |
+| src/photobooth/ | 16 bố cục/8 phong cách/20 ảnh; trình ghép tải động, xấp ảnh 3D, fallback và xuất PNG |
 | src/content/ | Hợp đồng API, GET/timeout, dự phòng và provider nội dung trước App |
 
 ## 2. Dữ liệu nội dung

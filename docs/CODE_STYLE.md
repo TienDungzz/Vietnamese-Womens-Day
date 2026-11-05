@@ -9,7 +9,7 @@
 - Dùng `aria-expanded`, `aria-pressed`, `aria-selected` và các thuộc tính `data-*` cho trạng thái tương tác. Không tạo class trạng thái chung như `active`, `seen`.
 - ID phục vụ ARIA, danh mục frame và dữ liệu API không phụ thuộc tên class CSS.
 
-`global.css` chứa reset, theme, bố cục chính và các block dùng chung. `photobooth.css` chứa photobooth, popup chỉnh ảnh và xấp ảnh. CSS được trình bày theo từng rule/declaration; các media query cùng điều kiện được gom lại, reduced motion đặt cuối.
+`global.css` chứa reset, theme, bố cục chính và các block dùng chung. `photobooth.css` chứa photobooth và popup chỉnh ảnh, tải cùng module ghép ảnh. `photo-stack.css` chứa xấp ảnh và vùng bấm, tải sớm cùng fallback để không lệch khung trước khi mở photobooth. CSS được trình bày theo từng rule/declaration; các media query cùng điều kiện được gom lại, reduced motion đặt cuối.
 
 ## Phần đã dọn
 
