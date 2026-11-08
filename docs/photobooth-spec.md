@@ -1,16 +1,16 @@
 ﻿# Photobooth — 20 khoảnh khắc, 10 lời thương
 
 **Ngày lập:** 02/11/2026.  
-**Cập nhật triển khai:** 04/11/2026.  
+**Cập nhật tài liệu:** 08/11/2026.  
 **Trạng thái:** Đã triển khai; hiện dùng 20 link ảnh mẫu Lorem Picsum, có thể thay bằng link hoặc file ảnh chính thức.  
 **Phạm vi tài liệu:** Đặc tả đã thảo luận và ghi chú bản triển khai hiện hành. Chủ dự án đã chọn dùng bộ ảnh cố định.
 
 ### Bản triển khai hiện tại
 
-- `src/photobooth/data.ts`: 16 bố cục, 8 phong cách frame, 20 ID ảnh và dữ liệu bản nháp. `decorations.ts` và `specialFrames.ts` vẽ họa tiết dùng chung cho preview và PNG.
+- `src/photobooth/data.ts`: 16 bố cục, 8 phong cách frame và dữ liệu bản nháp. photoCatalog.ts cung cấp danh mục 20 ID ảnh dùng chung, tách khỏi hình học bố cục. `decorations.ts` và `specialFrames.ts` vẽ họa tiết dùng chung cho preview và PNG.
 - `src/photobooth/photos.json`: danh mục 20 ảnh; `src` là ảnh gốc để ghép, `thumb` là ảnh nhỏ; chấp nhận đường dẫn local hoặc link HTTPS trực tiếp. Chế độ demo giữ thông tin nguồn/tác giả ảnh Picsum.
-- Khi cấu hình API nội dung, danh mục ảnh hợp lệ từ API có ưu tiên cho cả thư viện, xấp ảnh và PNG; `photos.json` giữ vai trò dự phòng. Xem [CONTENT_API.md](CONTENT_API.md).
-- `src/photobooth/Photobooth.tsx`: chọn khung/ảnh, crop, hoán đổi, tự điền, xáo trộn, focus và VI/EN.
+- Khi cấu hình API nội dung, danh mục ảnh hợp lệ từ API có ưu tiên cho cả thư viện, xấp ảnh và PNG; `photos.json` giữ vai trò dự phòng. Xem [content-api.md](content-api.md).
+- `src/photobooth/Photobooth.tsx`: chọn khung/ảnh, crop, kéo hoán đổi, popup xóa ảnh, focus và VI/EN.
 - `src/photobooth/render.ts`: dùng chung phép crop và lớp khung cho preview và PNG.
 - `src/photobooth/PhotoStack.tsx`: xấp ảnh 3D có vùng nhấn và focus trùng khung ảnh; viền sáng khi hover/focus, giữ góc nhìn bó hoa khi đóng trình ghép.
 - `scripts/prepare-photobooth-photos.mjs`: xử lý đúng 20 nguồn trong `art/photos/originals/`, xuất WebP tối đa 1600px và thumbnail 320px sang `public/photos/`.
@@ -18,7 +18,7 @@
 
 Chạy `node scripts/check-photobooth.mjs --remote` để kiểm tra với các ảnh thật từ link đã cấu hình, bao gồm xuất PNG và CORS. Mặc định script vẫn dùng ảnh QA được chặn riêng. Ảnh từ link được nạp bằng anonymous CORS trước khi vẽ Canvas; máy chủ ảnh cần cho phép truy cập từ website. Dùng ID ảnh Picsum cố định để thumbnail và bản xuất cùng nội dung. Không dùng link ngẫu nhiên hoặc link trang xem ảnh thay cho link file.
 
-Chạy `npm run prepare:photos` sau khi thêm `01`–`20` với một trong các đuôi JPEG/PNG/WebP/AVIF. Hiện chưa có bộ ảnh thật. Bản nháp lưu metadata/crop trong sessionStorage; không lưu ảnh base64. Cho phép dùng lặp ảnh; tự điền ưu tiên chưa dùng. Đổi sang khung ít ô vẫn giữ phần vượt trong mảng 20 ô để khôi phục. Chữ xuất theo ngôn ngữ đang chọn. Kích thước PNG khai báo riêng từng khung, từ 900×2400 ở dải dọc đến 2000×2800 ở mẫu 20 ảnh.
+Chạy `npm run prepare:photos` sau khi thêm `01`–`20` với một trong các đuôi JPEG/PNG/WebP/AVIF. Hiện chưa có bộ ảnh thật. Bản nháp lưu metadata/crop trong sessionStorage; không lưu ảnh base64. Cho phép chọn thủ công một ảnh ở nhiều ô; không có nút tự điền hoặc xáo trộn. Đổi sang khung ít ô vẫn giữ phần vượt trong mảng 20 ô để khôi phục. Chữ xuất theo ngôn ngữ đang chọn. Kích thước PNG khai báo riêng từng khung, từ 900×2400 ở dải dọc đến 2000×2800 ở mẫu 20 ảnh.
 
 ## 1. Ý tưởng và mục đích
 
@@ -60,7 +60,7 @@ Trên mobile chạm trực tiếp khung ảnh. Vùng nhận thao tác phủ cả
 ```mermaid
 flowchart TD
     A[Cảnh khám phá bó hoa] --> B[Nhấn trực tiếp xấp ảnh]
-    B --> C[Chọn bố cục và màu khung]
+    B --> C[Chọn bố cục và phong cách frame]
     C --> D[Chọn ô muốn điền]
     D --> E[Nhấn ảnh trong thư viện 20 ảnh]
     E --> F[Điền ảnh và chuyển sang ô trống tiếp theo]
@@ -76,11 +76,11 @@ flowchart TD
 
 Người xem có thể chỉnh hoặc đóng ở bất kỳ giai đoạn nào. Bản nháp được giữ trong phiên sử dụng theo phương án ở mục 7; không yêu cầu tải xuống mới được thoát.
 
-## 5. Danh sách 16 bố cục dự kiến
+## 5. Danh sách 16 bố cục hiện hành
 
 Danh sách cuối cùng ưu tiên nhiều ảnh hơn các phương án đầu. **Không còn bố cục một ảnh.** Số hàng/cột dưới đây chỉ rõ hướng để tránh nhầm ký hiệu lưới.
 
-| ID đề xuất | Số ảnh | Tên / dạng bố cục | Cấu trúc |
+| ID hiện hành | Số ảnh | Tên / dạng bố cục | Cấu trúc |
 | --- | ---: | --- | --- |
 | journal-2 | 2 | Hai ảnh kiểu nhật ký | Hai ảnh lệch nhẹ trên nền giấy |
 | strip-3 | 3 | Photobooth cổ điển | Ba ảnh xếp thành một dải dọc |
@@ -124,9 +124,9 @@ Khung có khoảng cách ô, viền, trang trí, lời đề tặng và dấu **
 
 Thumbnail cần thể hiện đúng vị trí/tỷ lệ các ô và số ảnh cần chọn. Nhấn một mẫu cập nhật khung xem trước và trạng thái ô ảnh.
 
-Bộ lọc đề xuất theo danh sách mới: **Tất cả · 2–3 ảnh · 4–6 ảnh · 8–12 ảnh · 16–20 ảnh**. Không giữ bộ lọc một ảnh từ ý tưởng ban đầu vì nhóm này đã bị bỏ.
+Bộ lọc theo danh sách hiện hành: **Tất cả · 2–3 ảnh · 4–6 ảnh · 8–12 ảnh · 16–20 ảnh**. Không giữ bộ lọc một ảnh từ ý tưởng ban đầu vì nhóm này đã bị bỏ.
 
-Tên mẫu và nhãn hỗ trợ VI/EN. Chỉ thay mẫu sau thao tác rõ ràng của người xem; không tự xoay vòng mẫu hoặc làm mất ảnh đã chọn.
+Nhãn hỗ trợ VI/EN; thẻ bố cục chỉ có sơ đồ và số ảnh, không hiển thị tên mẫu. Chỉ thay mẫu sau thao tác rõ ràng của người xem; không tự xoay vòng mẫu hoặc làm mất ảnh đã chọn.
 
 ## 7. Chọn ảnh và quản lý bản nháp
 
@@ -140,7 +140,7 @@ Tên mẫu và nhãn hỗ trợ VI/EN. Chỉ thay mẫu sau thao tác rõ ràng 
 
 Khi đổi bố cục, giữ ảnh đã chọn theo thứ tự cho các ô mới. Nếu mẫu mới ít ô hơn, phần vượt được giữ trong bản nháp 20 ô để khi quay lại mẫu nhiều ô có thể khôi phục theo thứ tự. Ô trống đầu tiên của mẫu mới được chọn để điền tiếp.
 
-Khi đóng và mở lại trong cùng phiên, giữ bố cục, bảng màu, ảnh và crop. Bản triển khai dùng sessionStorage cho metadata/crop và có thể khôi phục khi tải lại cùng tab. Không cam kết giữ sau khi đóng phiên trình duyệt; không lưu dữ liệu ảnh lớn dạng base64 vào localStorage.
+Khi đóng và mở lại trong cùng phiên, giữ bố cục, phong cách frame, ảnh và crop. Bản triển khai dùng sessionStorage cho metadata/crop và có thể khôi phục khi tải lại cùng tab. Không cam kết giữ sau khi đóng phiên trình duyệt; không lưu dữ liệu ảnh lớn dạng base64 vào localStorage.
 
 ### Ảnh lặp
 
@@ -201,7 +201,7 @@ Yêu cầu:
 
 Nếu ảnh được phục vụ từ nguồn bên ngoài, phải xử lý quyền truy cập/CORS trước khi vẽ Canvas; cấu hình ảnh không hợp lệ có thể làm không xuất được file. Với bộ ảnh cố định, ưu tiên đường dẫn cùng nguồn với website.
 
-## 11. Tổ chức dữ liệu và kỹ thuật đề xuất
+## 11. Tổ chức dữ liệu và kỹ thuật
 
 Các nhóm dưới đây đã được triển khai theo danh sách tệp ở đầu tài liệu:
 
@@ -232,12 +232,12 @@ Tọa độ ô nên dùng hệ chuẩn hóa hoặc hệ thiết kế chung rồi
 
 Nếu chọn upload thay bộ cố định, cần bổ sung riêng quy tắc giới hạn đúng 20 ảnh, định dạng/dung lượng, quyền riêng tư, thay/xóa ảnh và cách giữ dữ liệu. Chưa đưa camera trực tiếp, tài khoản, đồng bộ đám mây, chia sẻ công khai hay in ấn vào phạm vi hiện tại.
 
-## 13. Thứ tự triển khai dự kiến
+## 13. Quy trình bảo trì và kiểm chứng
 
-1. Chốt nguồn 20 ảnh, quy tắc lặp/lưu nháp, câu chữ và kích thước thành phẩm.
+1. Thay 20 ảnh demo bằng ảnh chính thức, giữ ID và kiểm CORS trước khi phát hành.
 2. Thiết kế 16 bố cục với tám phong cách frame; duyệt riêng mẫu nhiều ảnh trên mobile.
 3. Xây trình ghép DOM: chọn khung, chọn ô, thư viện, tiến độ và bản nháp.
-4. Thêm popup crop/zoom/xóa từ ảnh, kéo thả hoán đổi và cảnh báo độ phân giải.
+4. Kiểm popup crop/zoom/xóa từ ảnh, kéo thả hoán đổi và trạng thái lỗi ảnh.
 5. Làm bộ xuất PNG, kiểm khớp preview và xử lý tải lỗi.
 6. Dựng xấp ảnh 3D và tích hợp mở/đóng với cảnh bó hoa.
 7. Hoàn thiện VI/EN, bàn phím, responsive, reduced motion và kiểm thử.
@@ -257,8 +257,8 @@ Nếu chọn upload thay bộ cố định, cần bổ sung riêng quy tắc gi�
 
 ## 15. Tài liệu liên quan
 
-- [Đặc tả hiện hành](../ROSE_WISHES_20_10_SPEC.md): câu chuyện và 10 lời chúc đang có.
-- [Khung hình và ánh sáng](FRAMING_AND_LIGHTING.md): vị trí UI và vùng cảnh bó hoa.
-- [Ngôn ngữ và bố cục](LANGUAGES.md): VI/EN và giữ kích thước nội dung.
-- [Tải cảnh](SCENE_LOADING.md): không ảnh hưởng cơ chế sẵn sàng của cảnh hiện tại.
-- [Kiến trúc](ARCHITECTURE.md): dữ liệu, trạng thái và cách kiểm thử dự án.
+- [Đặc tả hiện hành](product-spec.md): câu chuyện và 10 lời chúc đang có.
+- [Khung hình và ánh sáng](framing-and-lighting.md): vị trí UI và vùng cảnh bó hoa.
+- [Ngôn ngữ và bố cục](languages.md): VI/EN và giữ kích thước nội dung.
+- [Tải cảnh](scene-loading.md): không ảnh hưởng cơ chế sẵn sàng của cảnh hiện tại.
+- [Kiến trúc](architecture.md): dữ liệu, trạng thái và cách kiểm thử dự án.

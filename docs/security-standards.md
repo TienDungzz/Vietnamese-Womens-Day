@@ -1,5 +1,7 @@
 # Quy chuẩn bảo mật và dữ liệu — Rose Wishes
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 ## Phạm vi và dữ liệu công khai
 
 Tham khảo [security-standards của Valentine](https://github.com/TienDungzz/Valentine-14-2/blob/main/docs/security-standards.md), điều chỉnh cho website có API nội dung và photobooth. Hiện không có đăng nhập, backend quản trị, camera, microphone hay upload ảnh của người xem.

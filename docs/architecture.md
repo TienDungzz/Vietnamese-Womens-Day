@@ -1,5 +1,9 @@
 # Kiến trúc, dữ liệu và kiểm thử
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 ## 1. Công nghệ và điểm vào
 
 React 19, TypeScript, Vite 6, Three.js, React Three Fiber và Drei. src/main.tsx gắn React root, LanguageProvider, ContentProvider, App và UI; Canvas nằm trong Scene3D tải động. package.json/package-lock.json là nguồn phiên bản dependency; không cần Blender để build frontend.
@@ -28,7 +32,7 @@ React 19, TypeScript, Vite 6, Three.js, React Three Fiber và Drei. src/main.tsx
 
 wishes.ts chứa 10 bản tiếng Việt, ID/title/text/kind. wishes.en.ts chứa title/text tiếng Anh theo ID. roses.ts kết hợp nội dung, màu, mẫu i % 5 và bouquet-layout.json. Không đổi ID khi đổi thứ tự hay dịch. Màu và layout không được suy từ câu chữ.
 
-Khi cấu hình API bằng `.env.local`, ContentProvider tải/kiểm tra dữ liệu trước khi mount App; lời chúc và danh mục ảnh hợp lệ từ API ưu tiên hơn bản nguồn. Lời chúc vẫn ghép với hình học theo ID; API không chỉnh layout/màu. Hai bản dịch có thể đến từ cùng response; đổi ngôn ngữ không fetch lại. Dự phòng theo từng nhóm nếu lỗi HTTP, timeout hoặc sai schema. Xem [CONTENT_API.md](CONTENT_API.md).
+Khi cấu hình API bằng `.env.local`, ContentProvider tải/kiểm tra dữ liệu trước khi mount App; lời chúc và danh mục ảnh hợp lệ từ API ưu tiên hơn bản nguồn. Lời chúc vẫn ghép với hình học theo ID; API không chỉnh layout/màu. Hai bản dịch có thể đến từ cùng response; đổi ngôn ngữ không fetch lại. Dự phòng theo từng nhóm nếu lỗi HTTP, timeout hoặc sai schema. Xem [content-api.md](content-api.md).
 
 Khi thêm ngôn ngữ cần mở rộng Language, thông điệp, dữ liệu lời chúc, dropdown, phần lưu lựa chọn và StableText. Khi đổi số lượng hoa phải cập nhật tất cả dữ liệu, Blender, GLB phụ kiện và kiểm tra; hiện tại yêu cầu là 10.
 
@@ -77,11 +81,10 @@ Fallback SVG chỉ dùng khi không có WebGL2. Lỗi tải GLB ở thiết bị
 ## 6. Lệnh kiểm tra
 
 ```sh
-npm run build
-npm run check
+npm run check:standards
 ```
 
-build chạy tsc -b và Vite. check chạy check-content, check-models, check-bouquet và check-male. Các phép kiểm bao gồm ID/nội dung/layout, danh sách GLB thực dùng, checksum, khả năng giải mã, texture, rig và đặc điểm bó hoa/nam. Đây là kiểm tra tài sản và cấu trúc, không tự chứng minh mô hình đẹp hay FPS đạt trên mọi máy.
+check:standards chạy fixture checker, check:coding, check, build mới, check:security và check:performance; không cần browser hoặc mạng khi đã cài dependency. build chạy tsc -b và Vite. check chạy check-styles, check-content, check-models, check-bouquet và check-male. Các phép kiểm bao gồm ID/nội dung/layout, danh sách GLB thực dùng, checksum, khả năng giải mã, texture, rig và đặc điểm bó hoa/nam. Đây là kiểm tra tài sản và cấu trúc, không tự chứng minh mô hình đẹp hay FPS đạt trên mọi máy.
 
 Kiểm tra trình duyệt cần Vite ở 127.0.0.1:5173 và Chrome riêng bật CDP 9222:
 
@@ -92,20 +95,20 @@ Kiểm tra trình duyệt cần Vite ở 127.0.0.1:5173 và Chrome riêng bật 
 | check-ui.mjs | 10 nút, migrate progress cũ, điều hướng vòng |
 | check-language.mjs | VI/EN, 10 thiệp, lưu lựa chọn, metadata, bàn phím dropdown |
 | check-language-layout.mjs | So khung trước/sau dịch ở 360/800/1440px, đủ 10 thiệp |
-| check-photobooth.mjs | 36 bản PNG, crop/preview, chọn/đổi ảnh, draft, lỗi/retry, VI/EN và mobile |
+| check-photobooth.mjs | 128 bản PNG (16 bố cục × 8 phong cách), crop/preview, chọn/đổi ảnh, draft, lỗi/retry, VI/EN và mobile |
 | check-content-api.mjs | Schema, endpoint chung/riêng, ID, URL, timeout và dự phòng |
 | check-content-api-browser.mjs | API HTTP thực, startup, thiệp VI/EN, ảnh API và PNG |
 
 Chạy từng script riêng. Một số script đóng cả QA browser khi xong; cần mở lại nếu script tiếp theo cần CDP. Các script ngôn ngữ dùng giao diện không WebGL để tập trung DOM; không thay cho kiểm tra 3D. --mobile thuộc check-scene-loading; --screenshots thuộc check-scene-loading và check-story, không áp dụng tự động cho mọi script.
 
-Photobooth dùng `sessionStorage` khóa `rose-photobooth` để giữ ID khung/màu và 20 ô cùng crop. Thư viện là bộ ảnh cố định trong public/photos do lệnh `npm run prepare:photos` tạo từ art/photos/originals. Không đưa ảnh vào danh sách GLB bắt buộc. Preview và export dùng chung renderer; ảnh gốc được giải mã khi dùng, cache tham chiếu được giải phóng khi đóng trình ghép. QA photobooth chặn request bằng ảnh thử, không yêu cầu xuất bản ảnh thử.
+Photobooth dùng `sessionStorage` khóa `rose-photobooth` để giữ ID khung/màu và 20 ô cùng crop. Danh mục mặc định dùng 20 link demo Picsum trong src/photobooth/photos.json; photoCatalog.ts cung cấp dữ liệu dùng chung. API hợp lệ được ưu tiên; có thể tạo file local trong public/photos từ art/photos/originals bằng npm run prepare:photos. Không đưa ảnh vào danh sách GLB bắt buộc. Preview và export dùng chung renderer; ảnh gốc được giải mã khi dùng, cache tham chiếu được giải phóng khi đóng trình ghép. QA photobooth chặn request bằng ảnh thử, không yêu cầu xuất bản ảnh thử.
 
 Kiểm tra story trên GPU phần mềm tạm ẩn mesh trang trí ngoài nhân vật, bó hoa và cửa sau bước kiểm tra sân; mục đích là đo chuyển động thật mà không để chi phí vẽ tán lá làm trình duyệt bỏ qua cả trạng thái. Cờ `--screenshots` vẫn chụp sân trước khi ẩn trang trí. Đây là cách giảm tải riêng trong phiên QA, không đổi cảnh của người dùng hoặc chứng minh FPS toàn cảnh trên thiết bị thực.
 
 Ví dụ khởi chạy PowerShell; đóng QA browser trước nếu profile đang được dùng:
 
 ```powershell
-Start-Process -FilePath 'C:\Program Files\Google\Chrome\Application\chrome.exe' -WindowStyle Hidden -ArgumentList '--headless=new','--no-first-run','--use-angle=swiftshader','--enable-unsafe-swiftshader','--remote-debugging-port=9222','--user-data-dir=C:\Users\trant\Desktop\Source\Women-Day\.preview-profile','about:blank'
+Start-Process -FilePath 'C:\Program Files\Google\Chrome\Application\chrome.exe' -WindowStyle Hidden -ArgumentList '--headless=new','--no-first-run','--use-angle=swiftshader','--enable-unsafe-swiftshader','--remote-debugging-port=9222','--user-data-dir=C:\Users\trant\Desktop\Source\Vietnamese-Women-Day\.preview-profile','about:blank'
 node scripts/check-language-layout.mjs
 ```
 

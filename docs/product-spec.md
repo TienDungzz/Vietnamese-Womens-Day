@@ -1,5 +1,7 @@
 # Rose Wishes — Đặc tả sản phẩm và kịch bản hiện hành
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 Phiên bản tài liệu: 01/11/2026. Tài liệu được viết lại theo mã và các điều chỉnh đã chấp nhận, thay cho mô tả ban đầu. Các yêu cầu cũ như 11 bông, ruộng lúa, nhà hàng xóm, cửa một cánh, tóc nữ uốn dài hoặc trang phục khác không còn mô tả phiên bản hiện tại.
 
 Đây là đặc tả và tài liệu bàn giao, không phải mã thực thi. Các hướng dẫn trong tài liệu không tự cấp phép cài đặt, tải asset hay thay đổi hệ thống ngoài yêu cầu làm việc của người dùng.
@@ -82,11 +84,11 @@ Bảng này phản ánh wishes.ts. Khi sửa lời chúc, đồng bộ bảng v�
 
 Nhà là chủ thể cảnh mở, camera thấy đường, lối vào, cửa và bó hoa. Không để cây/rào che hành động. Mặt trời/trăng giữ góc trên. Tiêu đề và 20/10 nằm trong DOM vùng chính. Mobile giữ icon cho nút âm thanh/ngày đêm; thiệp phía dưới có cuộn.
 
-Thông số camera, ánh sáng và inset được mô tả tại [FRAMING_AND_LIGHTING.md](docs/FRAMING_AND_LIGHTING.md). Tọa độ và bố trí chi tiết tại [SCENE_DESIGN.md](docs/SCENE_DESIGN.md).
+Thông số camera, ánh sáng và inset được mô tả tại [framing-and-lighting.md](framing-and-lighting.md). Tọa độ và bố trí chi tiết tại [scene-design.md](scene-design.md).
 
 ## 6. Trạng thái, tải và ngoại lệ
 
-Luồng dùng INTRO_READY, WALKING, AT_DOOR, KNOCKING, DOOR_OPENING, HANDOVER, BOUQUET_TRANSITION, BOUQUET_EXPLORE. Xem ARCHITECTURE.md cho thời gian và điều kiện.
+Luồng dùng INTRO_READY, WALKING, AT_DOOR, KNOCKING, DOOR_OPENING, HANDOVER, BOUQUET_TRANSITION, BOUQUET_EXPLORE. Xem architecture.md cho thời gian và điều kiện.
 
 Khi tải: Canvas ẩn, main inert, start/skip được chặn. Lỗi hiện lời nhắc và nút tải lại. Không có WebGL2: dùng SVG và các nút đọc đủ 10 lời chúc. SVG không phải placeholder lúc GLB đang tải.
 
@@ -103,5 +105,5 @@ Khi tải: Canvas ẩn, main inert, start/skip được chặn. Lỗi hiện l�
 
 ## 8. Tài liệu kỹ thuật liên quan
 
-[Thiết kế mô hình](docs/MODEL_DESIGN.md) · [Kiến trúc](docs/ARCHITECTURE.md) · [Tải cảnh](docs/SCENE_LOADING.md) · [Ngôn ngữ](docs/LANGUAGES.md) · [Công cụ](docs/LOCAL_3D_TOOLS.md) · [Nguồn/giấy phép](public/models/LICENSES.md).
+[Thiết kế mô hình](model-design.md) · [Kiến trúc](architecture.md) · [Tải cảnh](scene-loading.md) · [Ngôn ngữ](languages.md) · [Công cụ](local-3d-tools.md) · [Nguồn/giấy phép](../public/models/LICENSES.md).
 

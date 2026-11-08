@@ -1,5 +1,7 @@
 # Tải tài nguyên và chỉ hiện cảnh hoàn chỉnh
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 ## 1. Mục tiêu
 
 Người xem không thấy lần lượt nhân vật tạm, hoa sơ bộ rồi mô hình chính. Khi chưa chuẩn bị xong, overlay che cảnh và khóa tương tác. GLB story/high/balanced là mức chi tiết theo mục đích hiển thị, không phải placeholder.

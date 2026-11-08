@@ -1,5 +1,9 @@
 # Hiệu năng
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
+Tài liệu này ghi số liệu lịch sử. Ngân sách và yêu cầu hiện hành nằm tại [performance-standards.md](performance-standards.md).
+
 ## Đợt tối ưu 05/11/2026
 
 Kích thước từ production build, theo kB thập phân:

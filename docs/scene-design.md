@@ -1,5 +1,7 @@
 # Thiết kế bối cảnh và bố trí không gian
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 Tài liệu mô tả cảnh lắp trong src/scenes/Story.tsx. Đơn vị Three.js được dùng gần tỷ lệ mét để dễ bố trí; không phải bản vẽ thi công. Tọa độ dưới đây là tọa độ thế giới, trừ khi ghi cục bộ.
 
 ## 1. Hướng nhìn và các lớp không gian

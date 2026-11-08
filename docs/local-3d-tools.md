@@ -1,5 +1,7 @@
 # Công cụ 3D cục bộ và quy trình Blender
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 ## 1. Vai trò
 
 Blender chỉnh hình học, vật liệu, UV, trọng số và hoạt ảnh; MCP cho phép công cụ điều khiển phiên Blender đang mở. Node.js đóng gói GLB cho web. Chạy website/build không yêu cầu Blender hoặc MCP.

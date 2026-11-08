@@ -1,5 +1,7 @@
 # Nhân vật nữ — thiết kế và quy trình chỉnh sửa
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 ## 1. Hình dáng hiện hành
 
 Nữ dùng nền giải phẫu và rig tương thích với nam, nhưng có bản Blender và GLB riêng. Trang phục theo ảnh tham chiếu: áo xám tay ngắn, jeans xanh bạc màu cạp cao ống rộng, chi tiết rách nhẹ ở gối, giày sáng, túi vai ngà và dây chuyền nhỏ. Không còn váy sáng như đặc tả đầu tiên.

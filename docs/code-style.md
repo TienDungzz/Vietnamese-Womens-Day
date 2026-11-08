@@ -1,5 +1,7 @@
 # Quy ước giao diện và rà soát mã dư
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 ## Class BEM
 
 - Block độc lập: `app`, `site-header`, `brand`, `language-select`, `theme-toggle`, `sound-toggle`, `wish-card`, `photobooth`, `photo-editor`, `photo-stack`, `stable-text`, `scene-loading`.
@@ -13,7 +15,7 @@
 
 ## Phần đã dọn
 
-- Bỏ tên VI/EN trong dữ liệu bố cục vì UI chỉ dùng số ảnh và sơ đồ; giữ ID, kích thước và hình học của cả 12 bố cục.
+- Bỏ tên VI/EN trong dữ liệu bố cục vì UI chỉ dùng số ảnh và sơ đồ; giữ ID, kích thước và hình học của cả 16 bố cục.
 - Bỏ 4 nhãn dịch thuộc nội dung/nút đã loại khỏi UI.
 - Bỏ tham số callback không dùng ở cây cảnh.
 - Bỏ class CSS mồ côi và các khai báo bị ghi đè; gom media query trùng lặp, loại màu cảnh cũ đã được theme ngày/đêm thay thế.
@@ -25,8 +27,7 @@ Không xóa nguồn Blender, texture, recipe xuất mô hình hoặc tài liệu
 ## Kiểm tra
 
 ```sh
-npm run build
-npm run check
+npm run check:standards
 npm run check:styles
 npm run check:api
 npm run check:photobooth

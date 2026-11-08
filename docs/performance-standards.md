@@ -1,8 +1,10 @@
 # Quy chuẩn hiệu năng — Rose Wishes
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 ## Phạm vi
 
-Tham khảo [performance-standards của Valentine](https://github.com/TienDungzz/Valentine-14-2/blob/main/docs/performance-standards.md). Các ngưỡng dưới đây tách rõ kiểm tra build và mục tiêu cần đo thật. Lịch sử tối ưu xem [PERFORMANCE.md](PERFORMANCE.md).
+Tham khảo [performance-standards của Valentine](https://github.com/TienDungzz/Valentine-14-2/blob/main/docs/performance-standards.md). Các ngưỡng dưới đây tách rõ kiểm tra build và mục tiêu cần đo thật. Lịch sử tối ưu xem [performance-history.md](performance-history.md).
 
 ## Ngân sách kiểm tra tự động
 
@@ -33,4 +35,4 @@ Mục tiêu đề xuất: ít nhất 30 FPS, frame time p95 khoảng 33 ms trở
 
 npm run build rồi npm run check:performance kiểm ngân sách không cần browser. npm run check:performance -- --browser kiểm lazy loading ở production preview mặc định cổng 5188 và Chrome QA CDP 9222; đổi URL bằng PERFORMANCE_QA_URL. Kiểm thử này dùng fallback giả lập, không chứng minh hiệu năng WebGL.
 
-npm run check và npm run check:photobooth kiểm tính toàn vẹn tài nguyên, xuất ảnh và hành vi liên quan. Điều kiện chạy browser QA xem CODE_STYLE.md. Không nới ngân sách nếu chưa ghi lý do và số đo trước/sau.
+npm run check và npm run check:photobooth kiểm tính toàn vẹn tài nguyên, xuất ảnh và hành vi liên quan. Điều kiện chạy browser QA xem code-style.md. Không nới ngân sách nếu chưa ghi lý do và số đo trước/sau.

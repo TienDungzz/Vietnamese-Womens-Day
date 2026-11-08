@@ -51,7 +51,7 @@ npm run check
 npm run build
 ```
 
-Finalizer bỏ idle trùng, bỏ sheen sai ở tóc mới, gắn atlas nguồn và nén texture/Meshopt. Khi dùng script tóc riêng, kiểm tra bản stage .qa/characters/female-hair-update.blend trước khi thay master. Chi tiết ở [nhân vật nữ](../../docs/FEMALE_CHARACTER.md).
+Finalizer bỏ idle trùng, bỏ sheen sai ở tóc mới, gắn atlas nguồn và nén texture/Meshopt. Khi dùng script tóc riêng, kiểm tra bản stage .qa/characters/female-hair-update.blend trước khi thay master. Chi tiết ở [nhân vật nữ](../../docs/female-character.md).
 
 ## 5. Kiểm tra hình ảnh và chuyển động
 

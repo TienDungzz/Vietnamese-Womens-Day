@@ -1,5 +1,7 @@
 # Quản lý tài nguyên và lịch sử dọn dự án
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 ## 1. Nguyên tắc
 
 Chỉ loại bỏ tài sản sau khi kiểm tra import từ main.tsx, URL từ sceneAssets.ts và các script dựng lại. Không coi mọi phiên bản mô hình là thừa: story/high/balanced có vai trò khác nhau, còn .blend là nguồn chỉnh sửa.
@@ -39,5 +41,5 @@ Báo cáo máy đọc nằm tại [cleanup-report.json](cleanup-report.json): 1.
 
 Chạy build/check, đối chiếu required assets và import reachability. Thử tải chậm/lỗi, story→studio và fallback. Không tự suy từ “không có URL runtime” rằng bản nguồn Blender có thể bỏ.
 
-Các vấn đề đã sửa cùng đợt trước gồm shader warm-up treo do StrictMode dọn material; chi tiết hiện tại ở SCENE_LOADING.md. Dọn tài nguyên và sửa tải là hai việc riêng, không phải xóa file sẽ tự giải quyết tải lỗi.
+Các vấn đề đã sửa cùng đợt trước gồm shader warm-up treo do StrictMode dọn material; chi tiết hiện tại ở scene-loading.md. Dọn tài nguyên và sửa tải là hai việc riêng, không phải xóa file sẽ tự giải quyết tải lỗi.
 

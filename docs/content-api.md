@@ -1,5 +1,7 @@
 # API lời chúc và ảnh photobooth
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 Frontend nhận dữ liệu JSON bằng GET. Không bắt buộc có backend để chạy: khi chưa cấu hình endpoint, ứng dụng dùng lời chúc và ảnh trong repository. Cấu hình API không thay đổi hình học, vị trí hoặc màu bó hoa.
 
 ## 1. Cấu hình

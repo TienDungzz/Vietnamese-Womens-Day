@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 const data=JSON.parse(fs.readFileSync('src/data/wishes.ts','utf8').replace('export const wishes = ','').replace(/;\s*$/, ''));
-const rows=fs.readFileSync('ROSE_WISHES_20_10_SPEC.md','utf8').split(/\r?\n/).filter(s=>s.startsWith('| rose-')).map(row=>row.split('|').map(s=>s.trim()));
+const rows=fs.readFileSync('docs/product-spec.md','utf8').split(/\r?\n/).filter(s=>s.startsWith('| rose-')).map(row=>row.split('|').map(s=>s.trim()));
 assert.equal(data.length,10);assert.equal(new Set(data.map(w=>w.id)).size,10);
 // The current specification documents all ten wishes directly.
 assert.equal(rows.length,10);

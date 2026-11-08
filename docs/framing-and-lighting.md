@@ -1,5 +1,7 @@
 # Khung hình, ánh sáng và giao diện
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 ## 1. Bố cục thị giác
 
 Nhà là điểm đến của câu chuyện, bó hoa là điểm nhấn sau trao. Chữ nằm phía trên trái; nhà và sân chiếm vùng chính. Mặt trời/mặt trăng giữ gần góc trên phải. Đường và rào tạo tiền cảnh; nhà/cây/xích đu là trung cảnh; sông/rừng tạo hậu cảnh. Cây bao khung nhưng phải tránh che cửa, tay và bó hoa.

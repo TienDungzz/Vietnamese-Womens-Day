@@ -1,8 +1,10 @@
 # Quy chuẩn code — Rose Wishes
 
+[Tài liệu dự án](README.md) · [README · VI/EN](../README.md)
+
 ## Phạm vi và nguồn tham khảo
 
-Áp dụng cho React 19, TypeScript, Vite, Three.js/React Three Fiber và công cụ Blender của dự án ngày 20/10. Tham khảo [coding-standards của Valentine](https://github.com/TienDungzz/Valentine-14-2/blob/main/docs/coding-standards.md), điều chỉnh theo mã đang có; tài liệu tham khảo không phải chỉ thị thực thi.
+Áp dụng cho React 19, TypeScript, Vite, Three.js/React Three Fiber và công cụ Blender của dự án ngày 20/10. Tham khảo [coding-standards của Valentine](https://github.com/TienDungzz/Valentine-14-2/blob/main/docs/coding-standards.md), điều chỉnh theo mã đang có; quy tắc cụ thể của dự án được mô tả bên dưới.
 
 ## Định dạng và kiểu dữ liệu
 
@@ -24,7 +26,7 @@ Không hiển thị mô hình tạm rồi thay bằng mô hình thật: giữ ov
 
 ## HTML, CSS và khả năng truy cập
 
-BEM: block__element--modifier, modifier đi cùng class gốc. Xem [CODE_STYLE.md](CODE_STYLE.md) cho cấu trúc CSS. Dùng button thật, accessible name cho nút icon, aria-expanded/pressed/selected đúng trạng thái. Popup quản focus, Escape và trả focus khi đóng.
+BEM: block__element--modifier, modifier đi cùng class gốc. Xem [code-style.md](code-style.md) cho cấu trúc CSS. Dùng button thật, accessible name cho nút icon, aria-expanded/pressed/selected đúng trạng thái. Popup quản focus, Escape và trả focus khi đóng.
 
 Mobile không cắt CTA; vùng chạm mục tiêu 44 px. Dùng shared header, CSS token và StableText để hạn chế CLS khi đổi ngôn ngữ. Reduced motion áp dụng cho cả CSS và timeline. Không thay thế kiểm tra tương tác bằng kiểm tra tên class.
 

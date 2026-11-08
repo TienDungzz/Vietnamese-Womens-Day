@@ -15,7 +15,7 @@ Năm mẫu hồng gồm 8/10/12 lớp, khoảng 45–67 cánh, cong dọc, khum 
 
 Giấy kem/hồng, tissue, nơ satin, cành và lá được dựng riêng trong accessories. Fillers chứa cúc ngà, hoa nhỏ trắng và lá hẹp để lấp khe. Mục tiêu 70/20/10 là định hướng phối, không là phép đo cố định mọi góc. Tránh đầu hoa phụ mọc từ tâm hoa chính.
 
-Màu/chất liệu xem docs/MODEL_DESIGN.md và src/data/roses.ts. Hình học và map thủ tục bó hoa là tài sản tự tạo của dự án.
+Màu/chất liệu xem docs/model-design.md và src/data/roses.ts. Hình học và map thủ tục bó hoa là tài sản tự tạo của dự án.
 
 ## 3. Dữ liệu chung
 
@@ -71,5 +71,5 @@ prepare-story-bouquet lấy hoa balanced, phụ kiện bản chính, simplify m�
 
 Xoay trước/sau/nghiêng/trên; quan sát cánh xuyên nhau, bọc bị lộ khoảng rỗng lớn, cành không nối đài, filler chọc giữa hoa chính và màu khác giữa các cảnh. fillers runtime tắt raycast; chỉ 10 hoa mở thiệp.
 
-Không giữ các bản before-*.blend và preview cũ làm nguồn hiện hành. .qa/ có thể tạo lại nhưng phải còn raw nếu định chạy packer. Xem [thiết kế mô hình](../../docs/MODEL_DESIGN.md), [giấy phép](../../public/models/LICENSES.md).
+Không giữ các bản before-*.blend và preview cũ làm nguồn hiện hành. .qa/ có thể tạo lại nhưng phải còn raw nếu định chạy packer. Xem [thiết kế mô hình](../../docs/model-design.md), [giấy phép](../../public/models/LICENSES.md).
 
