@@ -12,7 +12,12 @@
     "check:api": "node scripts/check-content-api.mjs",
     "check:styles": "node scripts/check-styles.mjs",
     "check:performance": "node scripts/check-performance.mjs",
-    "check": "node scripts/check-styles.mjs && node scripts/check-content.mjs && node scripts/check-models.mjs && node scripts/check-bouquet.mjs && node scripts/check-male.mjs"
+    "check": "node scripts/check-styles.mjs && node scripts/check-content.mjs && node scripts/check-models.mjs && node scripts/check-bouquet.mjs && node scripts/check-male.mjs",
+    "check:coding": "node scripts/check-coding.mjs",
+    "check:security": "node scripts/check-security.mjs",
+    "test:standards": "node scripts/check-security.mjs --self-test",
+    "check:dependencies": "npm audit --omit=dev",
+    "check:standards": "npm run test:standards && npm run check:coding && npm run check && npm run build && npm run check:security && npm run check:performance"
   },
   "dependencies": {
     "@react-three/drei": "^10.0.0",

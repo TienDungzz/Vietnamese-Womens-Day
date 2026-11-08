@@ -18,6 +18,16 @@ npm run check
 
 Vite in địa chỉ truy cập trong terminal, thông thường là http://localhost:5173. Nếu PowerShell chặn npm.ps1, dùng npm.cmd. Build tạo dist/; preview phục vụ bản build. Blender/MCP chỉ cần khi chỉnh mô hình. GLB được lưu cục bộ, không tải lại từ nguồn bên ngoài khi build; Google Fonts vẫn dùng mạng và có font hệ thống dự phòng.
 
+## Tiêu chuẩn và kiểm tra tự động
+
+- [Quy chuẩn code](docs/coding-standards.md): TypeScript, React, BEM và quyền sở hữu tài nguyên 3D.
+- [Quy chuẩn hiệu năng](docs/performance-standards.md): ngân sách bundle và QA trên thiết bị.
+- [Quy chuẩn bảo mật](docs/security-standards.md): API, storage, artifact phát hành và hosting.
+
+Chạy `npm run check:standards` để kiểm fixture của checker, coding, dữ liệu/model, build mới, bảo mật và ngân sách bundle. Nhóm này không cần trình duyệt hoặc mạng khi đã cài dependency. Lệnh riêng: `check:coding`, `check:security`, `check:performance`, `test:standards`.
+
+`npm run check:dependencies` kiểm dependency production qua npm audit và cần mạng. QA trình duyệt/thiết bị và header hosting cần kiểm chứng riêng.
+
 ## Bản đồ tài liệu
 
 | Tài liệu | Nội dung |
